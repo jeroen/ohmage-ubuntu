@@ -1,0 +1,24 @@
+#!/bin/sh
+
+set -e
+
+case "$1" in
+  configure)
+    :
+	#update viz server in DB.
+	mysql -u andwellness -p\&\!sickly -e 'update andwellness.preference set p_value = "http://127.0.0.1/R/call/Mobilize/" where p_key = "visualization_server_address";'
+	echo "updated viz server to 127.0.0.1"
+	clear
+	/opt/aw/install/showip.sh
+    ;;
+  abort-upgrade | abort-remove | abort-deconfigure)
+    :
+    ;;
+  *) echo "$0: didn't understand being called with \`$1'" 1>&2
+     exit 1;;
+esac
+
+#DEBHELPER#
+
+exit 0
+

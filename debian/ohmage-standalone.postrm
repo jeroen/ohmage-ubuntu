@@ -1,0 +1,23 @@
+#! /bin/sh
+
+set -e
+
+case "$1" in
+  remove)
+    :
+	#update viz server in DB.
+	mysql -u andwellness -p\&\!sickly -e 'update andwellness.preference set p_value = "http://rdev.mobilizingcs.org/R/call/Mobilize/" where p_key = "visualization_server_address";'    
+    ;;
+  purge | disappear | upgrade | failed-upgrade | abort-upgrade | abort-install)
+    :
+    ;;
+  *) echo "$0: didn't understand being called with \`$1'" 1>&2
+     exit 1;;
+esac
+
+#DEBHELPER#
+
+exit 0
+
+
+

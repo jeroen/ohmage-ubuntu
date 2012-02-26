@@ -1,0 +1,21 @@
+Source: ohmage-ubuntu 
+Section: web
+Priority: optional
+Maintainer: Jeroen Ooms <jeroenooms@gmail.com>
+Build-Depends: debhelper (>> 4.1.0), cdbs, patch
+Standards-Version: 3.9.2
+
+Package: ohmage-server 
+Architecture: all
+Depends: patch, ssl-cert, mysql-server, tomcat7, apache2
+Description: Ohmage server with mobilize frontend.
+
+Package: ohmage-standalone 
+Architecture: all
+Depends: ohmage-server, ohmage-viz
+Description: Ohmage server with mobilize frontend.
+
+Package: ohmage-viz 
+Architecture: all
+Depends: patch, ssl-cert, opencpu-server, libxml2-dev, libcurl4-openssl-dev
+Description: Ohmage viz server.

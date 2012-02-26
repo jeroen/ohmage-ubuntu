@@ -1,0 +1,53 @@
+#!/bin/sh
+
+set -e
+
+case "$1" in
+  configure)
+    :
+	service tomcat7 stop
+	service apache2 stop
+
+	chown -Rf tomcat7 /opt/aw
+	chgrp -Rf tomcat7 /opt/aw   
+	
+	#uncomment to delete aw dir.
+	#chmod -Rf 755 /opt/aw 
+	
+	#The dp part should only be executed on first install. See also .preinst script.
+	if [ -f /tmp/ohmage_server_upgrade ];
+	then
+		echo "Seems like this is an upgrade. Not setting up DB..."
+		rm /tmp/ohmage_server_upgrade
+	else
+		echo "Seems like first install. Setting up Ohmage database..."
+		cd /opt/aw/install				
+		chmod +x create.aws.db.sh
+		./create.aws.db.sh
+		service mysql restart
+		patch -N /etc/tomcat7/server.xml enable-tomcat-ajp.patch
+		ln -s /var/lib/tomcat7/webapps /opt/aw/as/webapps		
+	fi	
+	
+	# a2dissite default
+	a2enmod ssl
+	a2enmod proxy_ajp
+	a2ensite default
+	a2ensite default-ssl
+	a2ensite ohmage
+	service tomcat7 start	
+	service apache2 start	
+	chmod +x /opt/aw/install/showip.sh
+	/opt/aw/install/showip.sh
+    ;;
+  abort-upgrade | abort-remove | abort-deconfigure)
+    :
+    ;;
+  *) echo "$0: didn't understand being called with \`$1'" 1>&2
+     exit 1;;
+esac
+
+#DEBHELPER#
+
+exit 0
+

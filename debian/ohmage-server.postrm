@@ -1,0 +1,27 @@
+#! /bin/sh
+
+set -e
+
+case "$1" in
+  remove | abort-install)
+    :
+		rm -Rf /var/lib/tomcat7/webapps/ohmage
+		rm -Rf /var/lib/tomcat7/webapps/app
+		#rm -Rf /opt/aw
+		
+		service tomcat7 start
+		service apache2 start
+    ;;
+  purge | disappear | upgrade | failed-upgrade | abort-upgrade)
+    :
+    ;;
+  *) echo "$0: didn't understand being called with \`$1'" 1>&2
+     exit 1;;
+esac
+
+#DEBHELPER#
+
+exit 0
+
+
+

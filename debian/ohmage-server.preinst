@@ -1,0 +1,46 @@
+#!/bin/sh
+
+set -e
+
+case "$1" in
+  install)
+    :
+		if [ -f /etc/init.d/tomcat7 ];
+		then
+			service tomcat7 stop
+		fi   
+		if [ -f /etc/init.d/apache2 ];
+		then
+			service apache2 stop
+		fi	
+		rm -Rf /var/lib/tomcat7/webapps/app
+		rm -Rf /var/lib/tomcat7/webapps/ohmage
+    ;;
+  upgrade)
+	:
+		#file will be used in .postinst
+		echo "This is an upgrade..."
+		touch /tmp/ohmage_server_upgrade
+		
+		if [ -f /etc/init.d/tomcat7 ];
+		then
+			service tomcat7 stop
+		fi   
+		if [ -f /etc/init.d/apache2 ];
+		then
+			service apache2 stop
+		fi	
+		rm -Rf /var/lib/tomcat7/webapps/app
+		rm -Rf /var/lib/tomcat7/webapps/ohmage
+    ;;
+  abort-upgrade)
+    :
+    ;;
+  *) echo "$0: didn't understand being called with \`$1'" 1>&2
+     exit 1;;
+esac
+
+#DEBHELPER#
+
+exit 0
+

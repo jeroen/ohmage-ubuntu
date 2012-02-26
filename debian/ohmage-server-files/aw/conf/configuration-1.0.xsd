@@ -1,0 +1,153 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" elementFormDefault="qualified">
+  <xs:element name="campaign">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element ref="campaignName"/>
+        <xs:element ref="campaignVersion"/>
+        <xs:element ref="serverUrl"/>
+        <xs:element ref="surveys"/>
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="campaignName" type="NonEmptyString"/>
+  <xs:element name="campaignVersion" type="NonEmptyString"/>
+  <xs:element name="serverUrl" type="NonEmptyString"/>
+  <xs:element name="surveys">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element maxOccurs="unbounded" ref="survey"/>
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="survey">
+    <xs:complexType>
+      <xs:all>
+        <xs:element ref="id"/>
+        <xs:element ref="title"/>
+        <xs:element ref="description"/>
+        <xs:element ref="introText" minOccurs="0"/>
+        <xs:element ref="submitText"/>
+        <xs:element ref="showSummary"/>
+        <xs:element ref="editSummary" minOccurs="0"/>
+        <xs:element ref="summaryText" minOccurs="0"/>
+        <xs:element ref="anytime"/>
+        <xs:element ref="contentList"/>
+      </xs:all>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="title" type="NonEmptyString"/>
+  <xs:element name="description" type="NonEmptyString"/>
+  <xs:element name="introText" type="NonEmptyString"/>
+  <xs:element name="submitText" type="NonEmptyString"/>
+  <xs:element name="showSummary" type="xs:boolean"/>
+  <xs:element name="editSummary" type="xs:boolean"/>
+  <xs:element name="summaryText" type="NonEmptyString"/>
+  <xs:element name="anytime" type="xs:boolean"/>
+  <xs:element name="contentList">
+    <xs:complexType>
+      <xs:choice maxOccurs="unbounded">
+        <xs:element ref="prompt"/>
+        <xs:element ref="repeatableSet"/>
+        <xs:element ref="message"/>
+      </xs:choice>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="repeatableSet">
+    <xs:complexType>
+      <xs:all>
+        <xs:element ref="id"/>
+        <xs:element ref="terminationQuestion"/>
+        <xs:element ref="terminationTrueLabel"/>
+        <xs:element ref="terminationFalseLabel"/>
+        <xs:element ref="terminationSkipEnabled"/>
+        <xs:element ref="terminationSkipLabel" minOccurs="0"/>
+        <xs:element ref="condition" minOccurs="0"/>
+        <xs:element ref="prompts"/>
+      </xs:all>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="terminationSkipEnabled" type="xs:boolean"/>
+  <xs:element name="terminationSkipLabel" type="NonEmptyString"/>
+  <xs:element name="terminationQuestion" type="NonEmptyString"/>
+  <xs:element name="terminationTrueLabel" type="NonEmptyString"/>
+  <xs:element name="terminationFalseLabel" type="NonEmptyString"/>
+  <xs:element name="prompts">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="1" maxOccurs="unbounded" ref="prompt"/>
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="id">
+    <xs:simpleType>
+      <xs:restriction base="xs:string">
+        <xs:pattern value="[0-9a-zA-Z_]{1,}"/>
+      </xs:restriction>
+    </xs:simpleType>
+  </xs:element>
+  <xs:element name="message">
+    <xs:complexType>
+      <xs:all>
+        <xs:element ref="condition" minOccurs="0"/>
+        <xs:element ref="messageText"/>
+      </xs:all>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="messageText" type="xs:string"/>
+  <xs:element name="prompt">
+    <xs:complexType>
+      <xs:all>
+        <xs:element ref="displayType"/>
+        <xs:element ref="displayLabel"/>
+        <xs:element ref="unit" minOccurs="0"/>
+        <xs:element ref="id"/>
+        <xs:element ref="promptText"/>
+        <xs:element ref="abbreviatedText" minOccurs="0"/>
+        <xs:element ref="explanationText" minOccurs="0"/>
+        <xs:element ref="promptType"/>
+        <xs:element ref="properties" minOccurs="0"/>
+        <xs:element ref="default" minOccurs="0"/>
+        <xs:element ref="condition" minOccurs="0"/>
+        <xs:element ref="skippable"/>
+        <xs:element ref="skipLabel" minOccurs="0"/>
+      </xs:all>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="displayType" type="NonEmptyString"/>
+  <xs:element name="displayLabel" type="NonEmptyString"/>
+  <xs:element name="unit" type="NonEmptyString"/>
+  <xs:element name="promptText" type="NonEmptyString"/>
+  <xs:element name="abbreviatedText" type="NonEmptyString"/>
+  <xs:element name="explanationText" type="NonEmptyString"/>
+  <xs:element name="promptType" type="NonEmptyString"/>
+  <xs:element name="properties">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element maxOccurs="unbounded" ref="property"/>
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="property">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element ref="key"/>
+        <xs:element ref="label"/>
+        <xs:element ref="value" minOccurs="0"/>
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="key" type="NonEmptyString"/>
+  <xs:element name="label" type="NonEmptyString"/>
+  <xs:element name="value" type="NonEmptyString"/>
+  <xs:element name="default" type="NonEmptyString"/>
+  <xs:element name="skippable" type="xs:boolean"/>
+  <xs:element name="condition" type="NonEmptyString"/>
+  <xs:element name="skipLabel" type="NonEmptyString"/>
+  <xs:simpleType name="NonEmptyString">
+    <xs:restriction base="xs:string">
+      <xs:minLength value="1"/>
+      <xs:pattern value=".*[^\s].*"/>
+    </xs:restriction>
+  </xs:simpleType>
+</xs:schema>

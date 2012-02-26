@@ -1,0 +1,6 @@
+Redirect 302 /index.html /ohmage
+
+<IfModule mod_proxy_ajp.c>
+        ProxyPass /app ajp://127.0.0.1:8009/app
+        ProxyPass /ohmage ajp://127.0.0.1:8009/ohmage
+</IfModule>
