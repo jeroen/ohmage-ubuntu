@@ -14,7 +14,7 @@ case "$1" in
 	
 	#install Mobilize
 	R -e 'install.packages(c("Mobilize", "XML"), repos="http://cran.cnr.berkeley.edu/", lib="/mnt/export/opencpu-cran-library")'
-	R CMD INSTALL Mobilize_2.9-7.tar.gz --library=/mnt/export/opencpu-cran-library
+	R CMD INSTALL Mobilize_2.9-8.tar.gz --library=/mnt/export/opencpu-cran-library
 	R CMD INSTALL Ohmage_2.9-7.tar.gz --library=/mnt/export/opencpu-cran-library
 	
 	#restart opencpu
