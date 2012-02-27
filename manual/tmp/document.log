@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.1415926-1.40.10 (TeX Live 2009/Debian) (format=pdflatex 2011.11.7)  23 FEB 2012 12:17
+This is pdfTeX, Version 3.1415926-1.40.10 (TeX Live 2009/Debian) (format=pdflatex 2011.11.7)  26 FEB 2012 18:36
 entering extended mode
  Source specials enabled.
  %&-line parsing enabled.
@@ -379,7 +379,7 @@ LaTeX Font Info:    Font shape `OT1/cmtt/bx/n' in size <12> not available
 Here is how much of TeX's memory you used:
  5256 strings out of 495061
  78862 string characters out of 1182621
- 164764 words of memory out of 3000000
+ 164765 words of memory out of 3000000
  8344 multiletter control sequences out of 15000+50000
  9456 words of font info for 34 fonts, out of 3000000 for 9000
  28 hyphenation exceptions out of 8191
@@ -391,7 +391,7 @@ s/cm/cmssbx10.pfb></usr/share/texmf-texlive/fonts/type1/public/amsfonts/cm/cmsy
 10.pfb></usr/share/texmf-texlive/fonts/type1/public/amsfonts/cm/cmti10.pfb></us
 r/share/texmf-texlive/fonts/type1/public/amsfonts/cm/cmtt10.pfb></usr/share/tex
 mf-texlive/fonts/type1/public/amsfonts/cm/cmtt12.pfb>
-Output written on document.pdf (7 pages, 232586 bytes).
+Output written on document.pdf (7 pages, 232248 bytes).
 PDF statistics:
  156 PDF objects out of 1000 (max. 8388607)
  27 named destinations out of 1000 (max. 500000)

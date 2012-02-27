@@ -8,7 +8,7 @@
 \usepackage{verbatim}
 
 \title{Ohmage Installation and Administration Manual for Ubuntu 11.10}
-\subtitle{Version 2.9-2}
+\subtitle{Version 2.10-1}
 
 
 \begin{document}
@@ -28,8 +28,8 @@ The following instructions will deploy a server with:
 
 \begin{itemize}
   \item Ubuntu 11.10
-  \item Ohmage 2.9
-  \item OpenCPU beta2
+  \item Ohmage 2.10
+  \item OpenCPU beta3
 \end{itemize}
 
 \noindent The 11.10 version of Ubuntu ships with the following
@@ -94,11 +94,11 @@ Once the system is up to date, you can begin installing Ohmage.
 
 \subsection{Ohmage Installation}
 
-Start by adding the \texttt{ohmage-2.9} package respository to our system:
+Start by adding the \texttt{ohmage-2.10} package respository to our system:
 
 \begin{verbatim}
     sudo apt-get install python-software-properties
-    sudo add-apt-repository ppa:opencpu/ohmage-2.9
+    sudo add-apt-repository ppa:opencpu/ohmage-2.10
 \end{verbatim}
 The system will ask for confirmation on importing the public key. After the
 repository has been added to the system, update the package list:
@@ -112,8 +112,8 @@ install only the ohmage server and frontend, run:
 \begin{verbatim}
     sudo apt-get install ohmage-server
 \end{verbatim}
-If you want to install both ohmage and the optional vizualization server you can
-install
+This will be sufficient to get started with Ohmage. If you want to install both
+ohmage and the optional vizualization server you can install
 
 \begin{verbatim}
     sudo apt-get install ohmage-standalone
