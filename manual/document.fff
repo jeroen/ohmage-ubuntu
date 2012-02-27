@@ -1,0 +1,10 @@
+\begin{figure*}
+
+\begin{center}
+\includegraphics[width=10cm]{frontend.png}
+\caption{A screenshot of the FrontEnd homepage.}
+\label{frontend}
+\end{center}
+\end{figure*}
+\efloatseparator
+ 

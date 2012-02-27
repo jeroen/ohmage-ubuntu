@@ -1,0 +1,381 @@
+%%This is a very basic article template.
+%%There is just one section and two subsections.
+\documentclass{scrartcl}
+\usepackage[colorlinks, urlcolor=blue]{hyperref}
+\usepackage{fullpage}
+\usepackage{graphics}
+\usepackage{graphicx}
+\usepackage{verbatim}
+
+\title{Ohmage Installation and Administration Manual for Ubuntu 11.10}
+\subtitle{Version 2.9-2}
+
+
+\begin{document}
+
+\maketitle
+
+\noindent Feedback, bugs, comments, suggestions, etc, about the Ubuntu
+installation packages or this document are welcome and can go to
+\href{mailto:jeroen.ooms@stat.ucla.edu}{jeroen.ooms@stat.ucla.edu}.
+Communication about the Ohmage software itself is easiets through github:
+\href{https://github.com/cens/ohmageServer}{https://github.com/cens/ohmageServer}.
+
+
+\section*{About}
+
+The following instructions will deploy a server with:
+
+\begin{itemize}
+  \item Ubuntu 11.10
+  \item Ohmage 2.9
+  \item OpenCPU beta2
+\end{itemize}
+
+\noindent The 11.10 version of Ubuntu ships with the following
+software versions of third party Ohmage dependencies:
+
+\begin{itemize}
+  \item Linux kernel 3.0.0
+  \item OpenJDK 6b23
+  \item OpenJDK 7b147 (not in use for now)
+  \item MySQL 5.1.58
+  \item Apache 2.2.20 (includes mod-proxy-ajp and mod-ssl)
+  \item Tomcat 7.0.21
+\end{itemize}
+
+\noindent Please note that at this point, Ubuntu is not officially
+supported by the Ohmage development team.
+
+\section{Installation}
+
+This section will show how to install Ohmage on Ubuntu 11.10. At this
+point there are no official Ubuntu builds of Ohmage. The
+\texttt{ohmage-server}, \texttt{ohmage-viz} and \texttt{ohmage-standalone} installation packages are kindly provided by the \texttt{OpenCPU} project.
+
+\subsection{Installing Ubuntu}
+
+\noindent The current build of Ohmage requires an Ubuntu 11.10 system. It can
+run on any version of Ubuntu, e.g. Ubuntu Desktop, Ubuntu Server, Kubuntu, Edubuntu,
+etc. If you are already have an installed system, you can skip this section. \\
+
+\noindent The preferred way of running Ohmage is on a clean Ubuntu Server
+edition. A copy of the Ubuntu Server installation disc can be obtained from the
+Ubuntu download page: \\
+
+\url{http://www.ubuntu.com/download/server/download} \\
+
+\noindent If you would like to run Ohmage on an Amazon EC2 server, the best way
+is to use one of the official AMI's as provided by the ubuntu team: \\
+
+\url{http://cloud-images.ubuntu.com/releases/11.10/release/} \\
+
+\noindent Another possibility is to install a Ohmage on a virtual Ubuntu server
+inside another OS. For example, the free VMware Player is available for Windows 
+and Linux, and on OSX one can use parallels to run an Ubuntu server. This way
+you can install Ubuntu and Ohmage safely on top of an existing system.
+
+\subsection{Getting the system up-to-date}
+
+\noindent Before begin installation of Ohmage, make sure you are running Ubuntu
+11.10 (Oneiric) by entering:
+
+\begin{verbatim}
+    cat /etc/*release
+\end{verbatim}
+If it turns out the system is running an older version of Ubuntu, upgrade the OS
+to 11.10 first. If the system is indeed 11.10, continue by updating the software packages to the latest versions:
+
+\begin{verbatim}
+    sudo apt-get update
+    sudo apt-get upgrade
+\end{verbatim}
+Once the system is up to date, you can begin installing Ohmage.
+
+\subsection{Ohmage Installation}
+
+Start by adding the \texttt{ohmage-2.9} package respository to our system:
+
+\begin{verbatim}
+    sudo apt-get install python-software-properties
+    sudo add-apt-repository ppa:opencpu/ohmage-2.9
+\end{verbatim}
+The system will ask for confirmation on importing the public key. After the
+repository has been added to the system, update the package list:
+
+\begin{verbatim}
+    sudo apt-get update
+\end{verbatim}
+Once this has succeeded ohmage can be installed. You have two options. To
+install only the ohmage server and frontend, run:
+
+\begin{verbatim}
+    sudo apt-get install ohmage-server
+\end{verbatim}
+If you want to install both ohmage and the optional vizualization server you can
+install
+
+\begin{verbatim}
+    sudo apt-get install ohmage-standalone
+\end{verbatim}
+Ohmage has many dependencies, and installation might take a while on a vanilla
+server. During installation of MySQL (a dependency), the system might ask for a
+password for the mysql root user. Make sure to enter a strong password and write
+it down somewhere. You will not need it anymore during the insallation though.\\
+
+\noindent If the installation finished without any problems, it will display the
+ip address of the host at the very end, which you can can open in your browser and use to test the server.
+
+\subsection{Uninstall Ohmage}
+
+If you want to remove Ohmage from a system you can use:
+
+\begin{verbatim}
+    sudo apt-get remove ohmage-*
+    sudo apt-get autoremove
+\end{verbatim}
+Note that this will delete the \texttt{andwellness} database from MySQL so all
+data will be lost.
+
+\section{Administration}
+
+The default install of Ohmage actually installs 3 sites:
+
+\begin{itemize}
+  \item Ohmage Server: \url{http://example.com/app/config/read}
+  \item Ohmage Front-end: \url{http://example.com/ohmage}
+  \item OpenCPU: \url{http://example.com/R} (only available with
+  ohmage-standalone)
+\end{itemize}
+The standard user is \texttt{ohmage.admin} with password \texttt{ohmage.passwd}.
+You will be prompted to change this password on first login.
+By default, both http and https are enabled. However, the https is served by a
+self-signed a.k.a. \emph{snakeoil} SSL certificate, so the browser will give a
+warning about insecure encryption.
+
+\subsection{Tomcat}
+
+Ubuntu 11.10 ships with Tomat7. The Tomcat server only hosts the AJP1.3
+prototcol on port 8009. Actual incoming HTTP and HTTPS are handled by Apache2
+and proxied to Tomcat. To manage the Tomcat server do:
+
+\begin{verbatim}
+    sudo service tomcat7 {start | stop | restart}
+\end{verbatim}
+This command calls the \texttt{/etc/init.d/tomcat7} script which should usually
+not be edited. Some global variables can be modified in
+\texttt{/etc/default/tomcat7}. Tomcat configuration files, for example
+\texttt{server.xml} are located at
+
+\begin{verbatim}
+    /etc/tomcat7/
+\end{verbatim}
+The tomcat7 log files \texttt{aw.log} and \texttt{catalina.out} are located
+at
+
+\begin{verbatim}
+    /var/log/tomcat7/
+\end{verbatim}
+The \texttt{webapps} directory, hosting the \texttt{.war} files is located at
+
+\begin{verbatim}
+    /var/lib/tomcat7/webapps/
+\end{verbatim}
+For backward-compatibility reasons \texttt{/opt/aw/as/webapps} has a symbolic
+link to the webapps directory.
+
+\subsection{Apache2}
+
+Incoming requests on port 80 (HTTP) and port 443 (HTTPS) are handled by the
+Apache2 webserver. The \texttt{mod\textunderscore proxy\textunderscore ajp}
+module is used to proxy requests to Tomcat server. To manage Apache2 use:
+
+\begin{verbatim}
+    sudo service apache2 {start | stop | restart}
+\end{verbatim}
+This command calls the \texttt{/etc/init.d/apache2} script which should usually not be edited. The main configuration file for apache2 is located at
+
+\begin{verbatim}
+    /etc/apache2/httpd.conf
+\end{verbatim}
+However by convention this file should rarely be edited. Custom configurations
+are located at:
+
+\begin{verbatim}
+    /etc/apache2/mods-available/
+    /etc/apache2/sites-available/
+\end{verbatim}
+These custom configurations can be activated and de-activated as follows:
+
+\begin{verbatim}
+    sudo a2enmod proxy_ajp
+    sudo a2dismod proxy_ajp
+    sudo a2ensite ohmage
+    sudo a2dissite ohmage
+\end{verbatim}
+These commands create or remove symoblic inside links to available configuration
+files inside the following directories:
+
+\begin{verbatim}
+    /etc/apache2/mods-enabled/
+    /etc/apache2/sites-enabled/
+\end{verbatim}
+All files in these directories are automatically included by the main
+\texttt{httpd.conf} file. The \texttt{ohmage} and \texttt{OpenCPU} sites are
+defined in the following files:
+
+\begin{verbatim}
+    /etc/apache2/sites-available/ohmage
+    /etc/apache2/sites-available/opencpu
+\end{verbatim}
+The Apache2 log files \texttt{access.log} and \texttt{error.log} are located at
+
+\begin{verbatim}
+    /var/log/apache2/
+\end{verbatim}
+
+\subsection{MySQL}
+
+The MySQL server can be managed through:
+
+\begin{verbatim}
+    sudo service mysql {start|stop|restart}
+\end{verbatim}
+
+\noindent This command calls the \texttt{/etc/init.d/mysql} script which should
+usually not be edited. Some global settings can be modified in
+\texttt{/etc/mysql/debian-start} and \texttt{/etc/mysql/my.cnf}. In general, it
+should not be required to manually enter mysql for using Ohmage. But if for some
+reason you want to, you can connect to the mysql server using:
+
+\begin{verbatim}
+    mysql -u andwellness -p
+\end{verbatim}
+The password is \texttt{\&!sickly} and all ohmage data is stored in database
+\texttt{andwellness}.
+
+\subsection{OpenCPU (part of ohmage-standalone}
+
+OpenCPU is used by the Ohmage-frontend to offer visualizations for data
+exploration. If you do not plan on using data vizualization, or use an
+external vizualization server, opencpu can be disabled:
+
+\begin{verbatim}
+    sudo a2dissite opencpu
+\end{verbatim}
+To change the vizualization server used by Ohmage, connect to MySQL and issue
+the following command:
+
+\begin{verbatim}
+    use andwellness;
+    update preference set p_value = "http://viz.example.com/R/call/Mobilize/"
+    where p_key = "visualization_server_address";
+\end{verbatim}
+Where the server url is replaced by the appropriate viz server. To
+restore it to the default value, run:
+
+\begin{verbatim}
+    use andwellness;
+    update preference set p_value = "http://127.0.0.1/R/call/Mobilize/" where
+    p_key = "visualization_server_address";
+\end{verbatim}
+
+\subsection{SSL certificate}
+
+By default, Apache2 uses self signed a.k.a. snakeoil certificates. This is
+convenient for development servers, but in a production setting these
+should be replaced by SSL certificates signed by an official Certificate Authority. \\
+
+\noindent The https configurations and locations of the certificates are defined
+in
+
+\begin{verbatim}
+    /etc/apache2/sites-available/default-ssl
+\end{verbatim}
+This file also contains detailed comments with configuration instructions.
+
+\subsection{Other Ohmage files}
+
+Photos and Documents uploaded by users are stored in
+
+\begin{verbatim}
+    /opt/aw/userdata/images/
+    /opt/aw/userdata/documents/
+\end{verbatim}
+Other than this, the \texttt{/opt/aw/} directory contains some scripts and files
+mostly for legacy reasons that you probably won't need.
+
+\section{Clients}
+
+Currently there are 3 clients for the Ohmage server system. These are:
+
+\begin{itemize}
+  \item The Ohmage Android App.
+  \item The Ohmage FrontEnd.
+  \item The Ohmage R package.
+\end{itemize}
+Below a brief description of these clients.
+
+\subsection{The Ohmage Android App}
+
+The Ohmage Android 'app' is the application on the mobile phone that can be used
+to fill out surveys and upload survey-responses to the server. As it currently
+stands, the server-url is hardcoded in the app and therefore the app has to be
+built from source. Figure \ref{fig:phone} shows a screenshot of the phone app running on
+an Android 2.2 device. \\
+
+\begin{figure}[h!]
+\begin{center}
+\includegraphics[width=4cm]{app.png}
+\caption{A screenshot of the Android app.}
+\label{fig:phone}
+\end{center}
+\end{figure}
+
+\noindent The source code and instructions on how to build the app are publicly
+available on: \\
+
+\url{https://github.com/cens/ohmagePhone} \\
+
+\subsection{The Ohmage FrontEnd}
+
+The Ohmage FrontEnd is an administrative web application to be used on a regular
+browser by both users and administrators of Ohmage. The application is
+automatically installed when installing the server using instructions above and
+available through: \url{http://example.com/ohmage}. Source code and
+development of the FrontEnd is publicly available on github at
+\url{https://github.com/cens/ohmageFrontEnd}. Figure \ref{fig:frontend} shows a
+screenshot of the FrontEnd homepage after logging in. \\
+
+\noindent The FrontEnd is a convenient client to review, share and explore data,
+add/remove users, classes, campaigns, perform administrative tasks, etc. The
+frontend can be build with some custom skinning options. The screenshot shows a build of
+Ohmage with the default theme.
+
+\begin{figure}[h!]
+\begin{center}
+\includegraphics[width=15cm]{frontend.png}
+\caption{A screenshot of the FrontEnd homepage.}
+\label{fig:frontend}
+\end{center}
+\end{figure}
+
+\subsection{The Ohmage \texttt{R} package}
+
+The Ohmage R package is an Ohmage client for R. It depends on other R packages
+like RCurl, XML and RJSONIO to do it's work. The package is mostly a convenient
+way to grab data from Ohmage and turn it into a data frame in R. Package and
+documentation are available from CRAN:
+\url{http://cran.r-project.org/web/packages/Ohmage}. Below a code snippet to
+illustrate the functionality of the package.
+
+\begin{verbatim}
+  library(Ohmage);
+  oh.login("ohmage.admin", "mypassword", "https://myserver.com/app");
+  campaigns <- oh.campaign.read();
+  mydata <- oh.survey_response.read("urn:campaign:myschool:food");
+\end{verbatim}
+
+
+
+\end{document}
