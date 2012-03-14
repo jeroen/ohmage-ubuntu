@@ -7,15 +7,12 @@ case "$1" in
     :
 	cd /opt/aw/install
 	
-	# Install ggplot2
-	R -e 'install.packages(c("plyr", "digest", "scales", "reshape2", "memoise", "proto"), lib="/mnt/export/opencpu-cran-library", repos="http://cran.cnr.berkeley.edu/")'
-	R CMD INSTALL ggplot2_0.9.0.tar.gz --library=/mnt/export/opencpu-cran-library
+	# Install latest versions from CRAN with dependencies
+	R -e 'install.packages(c("ggplot2", "RCurl", "Mobilize", "XML"), lib="/mnt/export/opencpu-cran-library", repos="http://cran.cnr.berkeley.edu/")'
 	
-	
-	#install Mobilize
-	R -e 'install.packages(c("Mobilize", "XML"), repos="http://cran.cnr.berkeley.edu/", lib="/mnt/export/opencpu-cran-library")'
-	R CMD INSTALL Mobilize_2.9-8.tar.gz --library=/mnt/export/opencpu-cran-library
-	R CMD INSTALL Ohmage_2.9-7.tar.gz --library=/mnt/export/opencpu-cran-library
+	#install local versions
+	R CMD INSTALL Ohmage_2.10-1.tar.gz --library=/mnt/export/opencpu-cran-library
+	R CMD INSTALL Mobilize_2.10-1.tar.gz --library=/mnt/export/opencpu-cran-library
 	
 	#restart opencpu
 	service opencpu-server restart	
