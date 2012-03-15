@@ -8,7 +8,7 @@ case "$1" in
 	cd /opt/aw/install
 	
 	# Install latest versions from CRAN with dependencies
-	R -e 'install.packages(c("ggplot2", "RCurl", "Mobilize", "XML"), lib="/mnt/export/opencpu-cran-library", repos="http://cran.cnr.berkeley.edu/")'
+	R -e 'install.packages(c("ggplot2", "RCurl", "Mobilize", "XML"), lib="/mnt/export/opencpu-cran-library", repos="http://cran.us.r-project.org/")'
 	
 	#install local versions
 	R CMD INSTALL Ohmage_2.10-1.tar.gz --library=/mnt/export/opencpu-cran-library
