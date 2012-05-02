@@ -1,5 +1,5 @@
-ohmage-ubuntu (2.10.0-oneiric4) oneiric; urgency=low
+ohmage-ubuntu (2.11.0-precise2) precise; urgency=low
 
-  * First build of the ohmage-ubuntu source package on Oneiric
+  * Ubuntu builds for Ohmage server software. See www.ohmage.org.
 
- -- Jeroen Ooms <jeroen@opencpu.org>  Sun, 26 Feb 2012 15:00:00 -0800
+ -- Jeroen Ooms <jeroen@opencpu.org>  Thu, 26 Apr 2012 15:00:00 -0800
