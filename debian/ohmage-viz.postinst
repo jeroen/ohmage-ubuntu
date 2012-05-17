@@ -11,7 +11,7 @@ case "$1" in
 	R -e 'install.packages(c("ggplot2", "RCurl", "Mobilize", "XML"), lib="/mnt/export/opencpu-cran-library", repos="http://cran.us.r-project.org/")'
 	
 	#install local versions
-	R CMD INSTALL Ohmage_2.10-1.tar.gz --library=/mnt/export/opencpu-cran-library
+	R CMD INSTALL Ohmage_2.11-0.tar.gz --library=/mnt/export/opencpu-cran-library
 	R CMD INSTALL Mobilize_2.10-1.tar.gz --library=/mnt/export/opencpu-cran-library
 	
 	#restart opencpu

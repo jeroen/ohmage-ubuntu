@@ -2,8 +2,8 @@ Source: ohmage-ubuntu
 Section: web
 Priority: optional
 Maintainer: Jeroen Ooms <jeroenooms@gmail.com>
-Build-Depends: debhelper (>> 4.1.0), cdbs, patch
-Standards-Version: 3.9.2
+Build-Depends: debhelper (>> 4.1.0), patch
+Standards-Version: 3.9.3
 
 Package: ohmage-server 
 Architecture: all
@@ -13,9 +13,14 @@ Description: Ohmage server with mobilize frontend.
 Package: ohmage-standalone 
 Architecture: all
 Depends: ohmage-server, ohmage-viz
-Description: Ohmage server with mobilize frontend.
+Description: Ohmage server and viz in one package.
 
 Package: ohmage-viz 
 Architecture: all
 Depends: patch, ssl-cert, opencpu-server, libxml2-dev, libcurl4-openssl-dev
 Description: Ohmage viz server.
+
+Package: ohmage-selfreg
+Architecture: all
+Depends: ohmage-server, postfix | sendmail
+Description: Ohmage server self registration module

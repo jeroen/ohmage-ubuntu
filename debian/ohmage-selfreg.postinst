@@ -1,0 +1,26 @@
+#!/bin/sh
+
+set -e
+
+case "$1" in
+  configure)
+    :
+	#update self registration preferences.
+	mysql -u ohmage -p\&\!sickly -e 'UPDATE ohmage.preference SET p_value="true" where p_key="self_registration_allowed";'
+	mysql -u ohmage -p\&\!sickly -e 'UPDATE ohmage.preference SET p_value="6Lc1V9ESAAAAAN8l_rFAn5LZWBVcSUEoCEVZzhya" where p_key="recaptcha_public_key";'
+	mysql -u ohmage -p\&\!sickly -e 'UPDATE ohmage.preference SET p_value="6Lc1V9ESAAAAAJRdzruUdgzcXBP-CQpoeX1sv_Tn" where p_key="recaptcha_private_key";'
+	clear
+	echo "Enabled self registration. Make sure your SMTP server is working properly though."
+	/opt/aw/install/showip.sh
+    ;;
+  abort-upgrade | abort-remove | abort-deconfigure)
+    :
+    ;;
+  *) echo "$0: didn't understand being called with \`$1'" 1>&2
+     exit 1;;
+esac
+
+#DEBHELPER#
+
+exit 0
+

@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.1415926-1.40.10 (TeX Live 2009/Debian) (format=pdflatex 2011.11.7)  26 FEB 2012 18:36
+This is pdfTeX, Version 3.1415926-1.40.10 (TeX Live 2009/Debian) (format=pdflatex 2012.5.2)  17 MAY 2012 12:16
 entering extended mode
  Source specials enabled.
  %&-line parsing enabled.
@@ -304,7 +304,7 @@ File: omscmr.fd 1999/05/25 v2.5h Standard LaTeX font definitions
 LaTeX Font Info:    Font shape `OMS/cmr/m/n' in size <10.95> not available
 (Font)              Font shape `OMS/cmsy/m/n' tried instead on input line 30.
 
-Underfull \hbox (badness 10000) in paragraph at lines 58--61
+Underfull \hbox (badness 10000) in paragraph at lines 55--67
 
  []
 
@@ -312,88 +312,121 @@ Underfull \hbox (badness 10000) in paragraph at lines 58--61
 
 
 {/var/lib/texmf/fonts/map/pdftex/updmap/pdftex.map}]
-Underfull \hbox (badness 10000) in paragraph at lines 62--65
-
- []
-
-LaTeX Font Info:    External font `cmex10' loaded for size
-(Font)              <10.95> on input line 66.
-LaTeX Font Info:    External font `cmex10' loaded for size
-(Font)              <8> on input line 66.
-LaTeX Font Info:    External font `cmex10' loaded for size
-(Font)              <6> on input line 66.
-
-Underfull \hbox (badness 10000) in paragraph at lines 66--67
+Underfull \hbox (badness 10000) in paragraph at lines 76--79
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 68--70
+Underfull \hbox (badness 10000) in paragraph at lines 80--83
+
+ []
+
+LaTeX Font Info:    External font `cmex10' loaded for size
+(Font)              <10.95> on input line 84.
+LaTeX Font Info:    External font `cmex10' loaded for size
+(Font)              <8> on input line 84.
+LaTeX Font Info:    External font `cmex10' loaded for size
+(Font)              <6> on input line 84.
+
+Underfull \hbox (badness 10000) in paragraph at lines 84--85
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 71--72
+Underfull \hbox (badness 10000) in paragraph at lines 86--88
+
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 89--90
 
  []
 
 [2]
-Underfull \hbox (badness 10000) in paragraph at lines 121--125
+Underfull \hbox (badness 10000) in paragraph at lines 139--143
 
  []
 
 [3] [4]
-Underfull \hbox (badness 10000) in paragraph at lines 285--288
+Underfull \hbox (badness 10000) in paragraph at lines 305--308
 
  []
 
 [5]
-Underfull \hbox (badness 10000) in paragraph at lines 321--326
+Underfull \hbox (badness 10000) in paragraph at lines 337--340
 
  []
 
-<app.png, id=103, 483.8075pt x 805.0075pt>
+
+Underfull \hbox (badness 10000) in paragraph at lines 349--359
+
+ []
+
+LaTeX Font Info:    External font `cmex10' loaded for size
+(Font)              <9> on input line 360.
+LaTeX Font Info:    External font `cmex10' loaded for size
+(Font)              <5> on input line 360.
+
+Overfull \hbox (19.80174pt too wide) in paragraph at lines 360--362
+[][][][]$\OT1/cmtt/m/n/9 https : / / aws-[]portal . amazon . com / gp / aws / h
+tml-[]forms-[]controller / contactus / ec2-[]email-[]limit-[]rdns-[]request$[][
+] 
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 360--362
+
+ []
+
+[6]
+Underfull \hbox (badness 10000) in paragraph at lines 398--403
+
+ []
+
+<app.png, id=121, 483.8075pt x 805.0075pt>
 File: app.png Graphic file (type png)
  <use app.png>
-Underfull \hbox (badness 10000) in paragraph at lines 335--337
+Underfull \hbox (badness 10000) in paragraph at lines 412--414
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 338--339
+Underfull \hbox (badness 10000) in paragraph at lines 415--416
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 342--349
+Underfull \hbox (badness 10000) in paragraph at lines 419--426
 
  []
 
-[6 <./app.png>] <frontend.png, id=115, 1223.57124pt x 619.31375pt>
+[7 <./app.png>] <frontend.png, id=134, 1158.3275pt x 709.65125pt>
 File: frontend.png Graphic file (type png)
 
 <use frontend.png>
 LaTeX Font Info:    Font shape `OT1/cmtt/bx/n' in size <12> not available
-(Font)              Font shape `OT1/cmtt/m/n' tried instead on input line 363.
- [7 <./frontend.png (PNG copy)>] (./document.aux) ) 
+(Font)              Font shape `OT1/cmtt/m/n' tried instead on input line 440.
+ [8 <./frontend.png>] (./document.aux) ) 
 Here is how much of TeX's memory you used:
- 5256 strings out of 495061
- 78862 string characters out of 1182621
- 164765 words of memory out of 3000000
- 8344 multiletter control sequences out of 15000+50000
- 9456 words of font info for 34 fonts, out of 3000000 for 9000
+ 5276 strings out of 495061
+ 79091 string characters out of 1182622
+ 165868 words of memory out of 3000000
+ 8356 multiletter control sequences out of 15000+50000
+ 10894 words of font info for 39 fonts, out of 3000000 for 9000
  28 hyphenation exceptions out of 8191
  43i,7n,36p,274b,418s stack positions out of 5000i,500n,10000p,200000b,50000s
-</usr/share/texmf-texlive/fo
-nts/type1/public/amsfonts/cm/cmr10.pfb></usr/share/texmf-texlive/fonts/type1/pu
-blic/amsfonts/cm/cmr12.pfb></usr/share/texmf-texlive/fonts/type1/public/amsfont
-s/cm/cmssbx10.pfb></usr/share/texmf-texlive/fonts/type1/public/amsfonts/cm/cmsy
-10.pfb></usr/share/texmf-texlive/fonts/type1/public/amsfonts/cm/cmti10.pfb></us
-r/share/texmf-texlive/fonts/type1/public/amsfonts/cm/cmtt10.pfb></usr/share/tex
-mf-texlive/fonts/type1/public/amsfonts/cm/cmtt12.pfb>
-Output written on document.pdf (7 pages, 232248 bytes).
+</usr/share/texmf-texlive/fonts/type1/p
+ublic/amsfonts/cm/cmbxti10.pfb></usr/share/texmf-texlive/fonts/type1/public/ams
+fonts/cm/cmr10.pfb></usr/share/texmf-texlive/fonts/type1/public/amsfonts/cm/cmr
+12.pfb></usr/share/texmf-texlive/fonts/type1/public/amsfonts/cm/cmssbx10.pfb></
+usr/share/texmf-texlive/fonts/type1/public/amsfonts/cm/cmsy10.pfb></usr/share/t
+exmf-texlive/fonts/type1/public/amsfonts/cm/cmti10.pfb></usr/share/texmf-texliv
+e/fonts/type1/public/amsfonts/cm/cmtt10.pfb></usr/share/texmf-texlive/fonts/typ
+e1/public/amsfonts/cm/cmtt12.pfb></usr/share/texmf-texlive/fonts/type1/public/a
+msfonts/cm/cmtt9.pfb>
+Output written on document.pdf (8 pages, 266169 bytes).
 PDF statistics:
- 156 PDF objects out of 1000 (max. 8388607)
- 27 named destinations out of 1000 (max. 500000)
- 139 words of extra memory for PDF output out of 10000 (max. 10000000)
+ 181 PDF objects out of 1000 (max. 8388607)
+ 30 named destinations out of 1000 (max. 500000)
+ 155 words of extra memory for PDF output out of 10000 (max. 10000000)
 

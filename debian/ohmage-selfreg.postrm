@@ -1,0 +1,26 @@
+#! /bin/sh
+
+set -e
+
+case "$1" in
+  remove)
+    :
+	#remove self registration stuff from the preferences.
+	mysql -u ohmage -p\&\!sickly -e 'UPDATE ohmage.preference SET p_value="false" where p_key="self_registration_allowed";'
+	mysql -u ohmage -p\&\!sickly -e 'UPDATE ohmage.preference SET p_value="" where p_key="recaptcha_public_key";'
+	mysql -u ohmage -p\&\!sickly -e 'UPDATE ohmage.preference SET p_value="" where p_key="recaptcha_private_key";'
+	echo "Self registration disabled."
+    ;;
+  purge | disappear | upgrade | failed-upgrade | abort-upgrade | abort-install)
+    :
+    ;;
+  *) echo "$0: didn't understand being called with \`$1'" 1>&2
+     exit 1;;
+esac
+
+#DEBHELPER#
+
+exit 0
+
+
+

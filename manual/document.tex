@@ -7,8 +7,8 @@
 \usepackage{graphicx}
 \usepackage{verbatim}
 
-\title{Ohmage Installation and Administration Manual for Ubuntu 11.10}
-\subtitle{Version 2.10-1}
+\title{Ohmage Installation and Administration Manual for Ubuntu 12.04 (LTS)}
+\subtitle{Version 2.11-0}
 
 
 \begin{document}
@@ -27,35 +27,53 @@ Communication about the Ohmage software itself is easiets through github:
 The following instructions will deploy a server with:
 
 \begin{itemize}
-  \item Ubuntu 11.10
-  \item Ohmage 2.10
-  \item OpenCPU beta3
+  \item Ubuntu 12.04
+  \item Ohmage 2.11
+  \item OpenCPU 0.7 (optional)
 \end{itemize}
 
-\noindent The 11.10 version of Ubuntu ships with the following
+\noindent The 12.04 version of Ubuntu ships with the following
 software versions of third party Ohmage dependencies:
 
 \begin{itemize}
-  \item Linux kernel 3.0.0
-  \item OpenJDK 6b23
-  \item OpenJDK 7b147 (not in use for now)
-  \item MySQL 5.1.58
+  \item Linux kernel 3.2.0
+  \item OpenJDK 6b24
+  \item MySQL 5.5.22
   \item Apache 2.2.20 (includes mod-proxy-ajp and mod-ssl)
-  \item Tomcat 7.0.21
+  \item Tomcat 7.0.26
+  \item Postfix 2.9.1
 \end{itemize}
 
-\noindent Please note that at this point, Ubuntu is not officially
-supported by the Ohmage development team.
+\noindent Please note that at this point there are no official Ubuntu builds of
+Ohmage. The Ohmage installation packages for Ubuntu are kindly provided by the
+\texttt{OpenCPU} project.
+
+
 
 \section{Installation}
 
-This section will show how to install Ohmage on Ubuntu 11.10. At this
-point there are no official Ubuntu builds of Ohmage. The
-\texttt{ohmage-server}, \texttt{ohmage-viz} and \texttt{ohmage-standalone} installation packages are kindly provided by the \texttt{OpenCPU} project.
+This section will show how to install Ohmage on Ubuntu 12.04. There are 4
+Ubuntu packages: \texttt{ohmage-server}, \texttt{ohmage-viz}, 
+\texttt{ohmage-standalone} and \texttt{ohmage-selfreg}. The
+\texttt{ohmage-server} package is the main package, which will install the
+ohmage server and web administration frontend. The \texttt{ohmage-viz} package
+installs the optional vizualization server. The vizualization server can run on
+a different server than \texttt{ohmage-server}. If you want to install both
+Ohmage server and vizualization server on one and the same machine, this is
+easiest done by installing \texttt{ohmage-standalone}. The
+\texttt{ohmage-standalone} package is a very thin meta-package that will simply
+install both \texttt{ohmage-server} and \texttt{ohmage-viz}, and automatically
+update the Ohmage server to use the localhost vizualization server. \\
+
+\noindent Finally installing the \texttt{ohmage-selfreg} package activates the
+self-registration on the server. However, in order for self registration to
+work properly, the server might need a valid domain name. For more details, see
+section \ref{selfreg}.
+
 
 \subsection{Installing Ubuntu}
 
-\noindent The current build of Ohmage requires an Ubuntu 11.10 system. It can
+\noindent The current build of Ohmage requires an Ubuntu 12.04 system. It can
 run on any version of Ubuntu, e.g. Ubuntu Desktop, Ubuntu Server, Kubuntu, Edubuntu,
 etc. If you are already have an installed system, you can skip this section. \\
 
@@ -68,7 +86,7 @@ Ubuntu download page: \\
 \noindent If you would like to run Ohmage on an Amazon EC2 server, the best way
 is to use one of the official AMI's as provided by the ubuntu team: \\
 
-\url{http://cloud-images.ubuntu.com/releases/11.10/release/} \\
+\url{http://cloud-images.ubuntu.com/releases/precise/release/} \\
 
 \noindent Another possibility is to install a Ohmage on a virtual Ubuntu server
 inside another OS. For example, the free VMware Player is available for Windows 
@@ -78,13 +96,13 @@ you can install Ubuntu and Ohmage safely on top of an existing system.
 \subsection{Getting the system up-to-date}
 
 \noindent Before begin installation of Ohmage, make sure you are running Ubuntu
-11.10 (Oneiric) by entering:
+12.04 (Precise) by entering:
 
 \begin{verbatim}
     cat /etc/*release
 \end{verbatim}
 If it turns out the system is running an older version of Ubuntu, upgrade the OS
-to 11.10 first. If the system is indeed 11.10, continue by updating the software packages to the latest versions:
+to 12.04 first. If the system is indeed 12.04, continue by updating the software packages to the latest versions:
 
 \begin{verbatim}
     sudo apt-get update
@@ -94,11 +112,11 @@ Once the system is up to date, you can begin installing Ohmage.
 
 \subsection{Ohmage Installation}
 
-Start by adding the \texttt{ohmage-2.10} package respository to our system:
+Start by adding the \texttt{ohmage-2.11} package respository to our system:
 
 \begin{verbatim}
     sudo apt-get install python-software-properties
-    sudo add-apt-repository ppa:opencpu/ohmage-2.10
+    sudo add-apt-repository ppa:opencpu/ohmage-2.11
 \end{verbatim}
 The system will ask for confirmation on importing the public key. After the
 repository has been added to the system, update the package list:
@@ -131,10 +149,10 @@ ip address of the host at the very end, which you can can open in your browser a
 If you want to remove Ohmage from a system you can use:
 
 \begin{verbatim}
-    sudo apt-get remove ohmage-*
+    sudo apt-get remove --purge ohmage-*
     sudo apt-get autoremove
 \end{verbatim}
-Note that this will delete the \texttt{andwellness} database from MySQL so all
+Note that this will delete the \texttt{ohmage} database from MySQL so all
 data will be lost.
 
 \section{Administration}
@@ -145,17 +163,18 @@ The default install of Ohmage actually installs 3 sites:
   \item Ohmage Server: \url{http://example.com/app/config/read}
   \item Ohmage Front-end: \url{http://example.com/ohmage}
   \item OpenCPU: \url{http://example.com/R} (only available with
-  ohmage-standalone)
+  \texttt{ohmage-viz})
 \end{itemize}
 The standard user is \texttt{ohmage.admin} with password \texttt{ohmage.passwd}.
 You will be prompted to change this password on first login.
 By default, both http and https are enabled. However, the https is served by a
 self-signed a.k.a. \emph{snakeoil} SSL certificate, so the browser will give a
-warning about insecure encryption.
+warning about insecure encryption. For more info see the section \ref{ssl} of
+this manual.
 
 \subsection{Tomcat}
 
-Ubuntu 11.10 ships with Tomat7. The Tomcat server only hosts the AJP1.3
+Ubuntu 12.04 ships with Tomat7. The Tomcat server only hosts the AJP1.3
 prototcol on port 8009. Actual incoming HTTP and HTTPS are handled by Apache2
 and proxied to Tomcat. To manage the Tomcat server do:
 
@@ -249,12 +268,12 @@ should not be required to manually enter mysql for using Ohmage. But if for some
 reason you want to, you can connect to the mysql server using:
 
 \begin{verbatim}
-    mysql -u andwellness -p
+    mysql -u ohmage -p
 \end{verbatim}
 The password is \texttt{\&!sickly} and all ohmage data is stored in database
-\texttt{andwellness}.
+\texttt{ohmage}.
 
-\subsection{OpenCPU (part of ohmage-standalone)}
+\subsection{OpenCPU (part of ohmage-viz)}
 
 OpenCPU is used by the Ohmage-frontend to offer visualizations for data
 exploration. If you do not plan on using data vizualization, or use an
@@ -267,7 +286,7 @@ To change the vizualization server used by Ohmage, connect to MySQL and issue
 the following command:
 
 \begin{verbatim}
-    use andwellness;
+    use ohmage;
     update preference set p_value = "http://viz.example.com/R/call/Mobilize/"
     where p_key = "visualization_server_address";
 \end{verbatim}
@@ -275,12 +294,13 @@ Where the server url is replaced by the appropriate viz server. To
 restore it to the default value, run:
 
 \begin{verbatim}
-    use andwellness;
+    use ohmage;
     update preference set p_value = "http://127.0.0.1/R/call/Mobilize/" where
     p_key = "visualization_server_address";
 \end{verbatim}
 
 \subsection{SSL certificate}
+\label{ssl}
 
 By default, Apache2 uses self signed a.k.a. snakeoil certificates. This is
 convenient for development servers, but in a production setting these
@@ -293,6 +313,63 @@ in
     /etc/apache2/sites-available/default-ssl
 \end{verbatim}
 This file also contains detailed comments with configuration instructions.
+
+\subsection{Self registration}
+\label{selfreg}
+
+Ohmage supports option self registration. This means that users can register an 
+account for themselves without any help from an administrator. The self
+registration module can be installed as follows:
+
+\begin{verbatim}
+    sudo apt-get install ohmage-selfreg
+\end{verbatim}
+
+\noindent As part of the self registration process, a user will receive an email
+with a confirmation code, and a link back to the server. In order for this to
+work properly, the server needs a valid hostname. The hostname of the server is
+defined in this file:
+
+\begin{verbatim}
+    /etc/hostname
+\end{verbatim}
+
+\noindent The link that is included in the confirmation email that self
+registered user receive, is determined by this file, so make sure it contains a
+proper hostname, and not e.g. \texttt{localhost} or some internal name. \\
+
+\noindent The self registration depends on a properly functioning
+SMTP server on the system, either Postfix or Sendmail. These will automatically
+be installed when installing \texttt{ohmage-selfreg}. During the installation of
+Postfix you might be propted for the hostname of your server. Again, make sure
+that you enter a valid hostname here that can be reached through the internet.
+
+\subsubsection{Important: Reverse DNS and Spam Detection}
+
+Because spam is a big problem these days, most email providers tend to flag
+emails that have been send from anonymous SMTP servers as spam. As a result,
+the self registration confirmation emails might end up in their spam-folder or
+junkmail. In order to minimize the chance that emails from Ohmage end up in spam
+filters, it is highly recommended to use a domain that you actually purchased,
+and not just the hostname of the machine that your ISP/hosting partner provided.
+Furthermore it is important that the \emph{\textbf{reverse DNS}} of the server
+to points back to this same domain name. Setting the reverse DNS is a process
+that only your hosting provider can do for you. Most providers require you to
+request this manually, for example, on EC2 you have to fill out this form: \\
+
+{\footnotesize\url{https://aws-portal.amazon.com/gp/aws/html-forms-controller/contactus/ec2-email-limit-rdns-request}}
+\\
+
+
+
+\noindent In order to test if the the DNS and Reverse DNS are working properly,
+you can use a command like \texttt{nslookup} on Linux or \texttt{tracert} on
+Windows. Alternatively you can use a free web tool to do the lookup for you,
+for example \url{http://www.dnsgoodies.com/}.
+
+ 
+
+
 
 \subsection{Other Ohmage files}
 

@@ -8,17 +8,15 @@ pkill mysql
 service mysql start
 
 #drop current database
-#mysql -u awstemproot -e "drop database andwellness;"
+#mysql -u awstemproot -e "drop database ohmage;"
+
+cat ./sql/base/*.sql > mydb.sql
+cat ./sql/preferences/default_preferences.sql >> mydb.sql
+cat ./sql/settings/*.sql >> mydb.sql
 
 #deploy mysql stuff
-mysql -u awstemproot < andwellness-ddl.sql
-
-#include all of the sql files
-rm ./sql-extra/andwellness_preferences.sql ./sql-extra/chipts_preferences.sql ./sql-extra/survey_response_privacy_states-chipts.sql
-echo "use andwellness" > extra.sql
-cat ./sql-extra/*.sql >> extra.sql
-mysql -u awstemproot < extra.sql
-rm extra.sql
+mysql -u awstemproot < mydb.sql
+rm mydb.sql
 
 #create andwellness user and deletes awstemproot
 mysql -u awstemproot < create.user.sql
