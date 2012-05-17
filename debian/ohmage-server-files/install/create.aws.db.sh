@@ -13,6 +13,7 @@ service mysql start
 cat ./sql/base/*.sql > mydb.sql
 cat ./sql/preferences/default_preferences.sql >> mydb.sql
 cat ./sql/settings/*.sql >> mydb.sql
+cat ./sql/custom/*.sql >> mydb.sql
 
 #deploy mysql stuff
 mysql -u awstemproot < mydb.sql
