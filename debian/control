@@ -2,7 +2,7 @@ Source: ohmage-ubuntu
 Section: web
 Priority: optional
 Maintainer: Jeroen Ooms <jeroenooms@gmail.com>
-Build-Depends: debhelper (>> 4.1.0), patch
+Build-Depends: debhelper (>> 4.1.0), patch, r-base-dev (>= 2.15.1), libcurl4-openssl-dev | libcurl4-gnutls-dev, libxml2-dev, opencpu-dev
 Standards-Version: 3.9.3
 
 Package: ohmage-server 
@@ -16,8 +16,8 @@ Depends: ohmage-server, ohmage-viz
 Description: Ohmage server and viz in one package.
 
 Package: ohmage-viz 
-Architecture: all
-Depends: patch, ssl-cert, opencpu-server, libxml2-dev, libcurl4-openssl-dev
+Architecture: any
+Depends: patch, ssl-cert, opencpu-server
 Description: Ohmage viz server.
 
 Package: ohmage-selfreg

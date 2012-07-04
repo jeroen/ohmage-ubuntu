@@ -1,7 +1,24 @@
-#! /bin/sh
+#!/bin/sh
 
-#nothing here
+set -e
 
+case "$1" in
+  install)
+    :
+
+    ;;
+  upgrade)
+	:
+		#file will be used in .postinst
+		echo "This is an upgrade of ohmage-viz..."
+		touch /tmp/ohmage_viz_upgrade
+    ;;
+  abort-upgrade)
+    :
+    ;;
+  *) echo "$0: didn't understand being called with \`$1'" 1>&2
+     exit 1;;
+esac
 
 #DEBHELPER#
 

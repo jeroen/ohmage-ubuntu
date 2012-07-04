@@ -25,7 +25,7 @@ case "$1" in
 		chmod +x create.aws.db.sh
 		./create.aws.db.sh
 		service mysql restart
-		patch -N /etc/tomcat7/server.xml enable-tomcat-ajp.patch
+		patch -N /etc/tomcat7/server.xml enable-tomcat-ajp.patch || true
 		ln -s /var/lib/tomcat7/webapps /opt/aw/as/webapps		
 	fi	
 	

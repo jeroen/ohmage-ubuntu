@@ -13,7 +13,7 @@ case "$1" in
 	rm -f /opt/aw/as/webapps
 	rm -Rf /opt/aw/userdata/images
 	rm -Rf /opt/aw/userdata/documents
-	patch -R -N /etc/tomcat7/server.xml /opt/aw/install/enable-tomcat-ajp.patch
+	patch -R -N /etc/tomcat7/server.xml /opt/aw/install/enable-tomcat-ajp.patch || true
 	bash /opt/aw/install/wipe.aws.db.sh
     ;;
   purge | disappear | abort-upgrade)

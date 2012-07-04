@@ -5,18 +5,28 @@ set -e
 case "$1" in
   configure)
     :
-	cd /opt/aw/install
-	
-	# Install latest versions from CRAN with dependencies
-	R -e 'install.packages(c("ggplot2", "RCurl", "Mobilize", "XML"), lib="/mnt/export/opencpu-cran-library", repos="http://cran.us.r-project.org/")'
-	
-	#install local versions
-	R CMD INSTALL Ohmage_2.11-0.tar.gz --library=/mnt/export/opencpu-cran-library
-	R CMD INSTALL Mobilize_2.10-1.tar.gz --library=/mnt/export/opencpu-cran-library
-	
-	#restart opencpu
-	service opencpu-server restart	
-	/usr/lib/opencpu/scripts/showip.sh
+	#The packages are only installed on first install. See also .preinst script.
+	if [ -f /tmp/ohmage_viz_upgrade ];
+	then
+		echo "Seems like this is an upgrade of ohmage-viz..."
+		rm /tmp/ohmage_viz_upgrade
+	else
+		#echo "First install of ohmage-viz. Downloading R packages..."
+		cd /opt/aw/install	
+		# Install latest versions from CRAN with dependencies
+		#R -e 'install.packages(c("ggplot2", "wordcloud", "RCurl", "Mobilize", "XML"), lib="/mnt/export/opencpu-cran-library", repos="http://cran.us.r-project.org/")'
+		
+		#install local versions
+		#R CMD INSTALL Ohmage_2.11-2.tar.gz --library=/mnt/export/opencpu-cran-library
+		#R CMD INSTALL Mobilize_2.11-2.tar.gz --library=/mnt/export/opencpu-cran-library
+		
+		#trying to patch preload config
+		patch -N /etc/opencpu/server.conf preload_config.patch || true
+		
+		#restart opencpu
+		service opencpu-server restart	
+		/usr/lib/opencpu/scripts/showip.sh		
+	fi		
     ;;
   abort-upgrade | abort-remove | abort-deconfigure)
     :

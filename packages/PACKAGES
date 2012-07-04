@@ -1,0 +1,174 @@
+Package: bitops
+Version: 1.0-4.1
+License: GPL (>= 2)
+MD5sum: 5b434b3e4e3957e247e420afba515e35
+
+Package: colorspace
+Version: 1.1-1
+Depends: R (>= 2.0.0), methods
+Suggests: KernSmooth, MASS, kernlab, mvtnorm, vcd
+License: BSD
+MD5sum: f383fe4737448ec0a1bd38c5c5302432
+
+Package: dichromat
+Version: 1.2-4
+Depends: R (>= 2.10)
+License: GPL-2
+MD5sum: d84b6cc1ba07fb84378ed2cf8cd84c80
+
+Package: digest
+Version: 0.5.2
+Depends: R (>= 2.4.1)
+License: GPL-2
+MD5sum: 3cf958c00f5a61430089bce151b6e5bb
+
+Package: ggplot2
+Version: 0.9.1
+Depends: R (>= 2.14), stats, methods
+Imports: plyr (>= 1.0), digest, grid, reshape2, scales (>= 0.2.1),
+        memoise, proto, MASS
+Suggests: quantreg, Hmisc, mapproj, maps, hexbin, gpclib, maptools,
+        multcomp, nlme, testthat
+License: GPL-2
+MD5sum: 93c1d6226f5b90f7373981386c489dfb
+
+Package: labeling
+Version: 0.1
+License: Unlimited
+MD5sum: 5d2b9242d70e2db358274b026e1cd465
+
+Package: lattice
+Version: 0.20-6
+Priority: recommended
+Depends: R (>= 2.14.0)
+Imports: grid, grDevices, graphics, stats, utils, methods
+Suggests: grid, KernSmooth, MASS
+Enhances: chron
+License: GPL (>= 2)
+MD5sum: 618d6a941d7f12af7516285000c7fe07
+
+Package: MASS
+Version: 7.3-19
+Priority: recommended
+Depends: R (>= 2.14.0), grDevices, graphics, stats, utils
+Suggests: lattice, nlme, nnet, survival
+License: GPL-2 | GPL-3
+MD5sum: 415197a60f15ee24934625fa175667af
+
+Package: memoise
+Version: 0.1
+Imports: digest
+License: MIT
+MD5sum: 8d0000e942cfc3758bc347bd47658afc
+
+Package: Mobilize
+Version: 2.11-2
+Depends: R (>= 2.14), stats, methods, Ohmage
+Imports: ggplot2, wordcloud, Ohmage, reshape2
+Suggests: XML, maps
+License: GPL
+MD5sum: 12d5be96a1afae4f952772bef842a7b0
+
+Package: munsell
+Version: 0.3
+Imports: colorspace
+Suggests: ggplot2
+License: MIT
+MD5sum: 542ee033e0a276b2f4b27c6b6b2e6dce
+
+Package: Ohmage
+Version: 2.11-2
+Depends: R (>= 2.14), stats, methods
+Imports: RCurl, RJSONIO
+Suggests: XML
+License: GPL
+MD5sum: c0fb29c6508420e4bd30286e63ee3215
+
+Package: plyr
+Version: 1.7.1
+Depends: R (>= 2.11.0)
+Suggests: abind, testthat (>= 0.2), tcltk, foreach, itertools,
+        iterators
+License: MIT
+MD5sum: 072e6a80e81b85059fb24d833e4df475
+
+Package: proto
+Version: 0.3-9.2
+Suggests: graph, Rgraphviz
+License: GPL-2
+MD5sum: eb0af63687f5b28676b84c1947f1af1d
+
+Package: RColorBrewer
+Version: 1.0-5
+Depends: R (>= 2.0.0)
+License: Apache License 2.0
+MD5sum: da52d639e105254e33346d5a39fa44d4
+
+Package: Rcpp
+Version: 0.9.13
+Depends: R (>= 2.15.1)
+Imports: methods
+Suggests: RUnit, inline, rbenchmark
+License: GPL (>= 2)
+MD5sum: a46bd0b7e82b6292fbbfe97644123ca0
+
+Package: RCurl
+Version: 1.91-1
+Depends: R (>= 2.7.0), methods, bitops
+Imports: methods
+Suggests: Rcompression, XML
+License: BSD
+MD5sum: 57f9132108927a29fb5fabe8b7213f05
+
+Package: reshape
+Version: 0.8.4
+Depends: R (>= 2.6.1), plyr
+License: MIT
+MD5sum: eade37fd6dc3b2f12207b5eb259ab41f
+
+Package: reshape2
+Version: 1.2.1
+Imports: plyr (>= 1.5), stringr, lattice
+Suggests: testthat
+License: MIT
+MD5sum: 7555c365890338841eaf64498e13c42d
+
+Package: RJSONIO
+Version: 0.98-1
+Depends: methods
+License: BSD
+MD5sum: 5802285f4a5a5ef720aed8b184d74720
+
+Package: scales
+Version: 0.2.1
+Depends: R (>= 2.12), methods
+Imports: RColorBrewer, stringr, dichromat, munsell (>= 0.2), plyr (>=
+        1.2), labeling
+Suggests: testthat
+License: MIT
+MD5sum: 68eda8ae8f09651015dd1efe3c7947f4
+
+Package: stringr
+Version: 0.6
+Depends: R (>= 2.14)
+Imports: plyr
+Suggests: testthat (>= 0.3)
+License: GPL-2
+MD5sum: 5112a9f52c288ee83e196a2af5ae086f
+
+Package: wordcloud
+Version: 2.0
+Depends: methods, Rcpp (>= 0.9.4), RColorBrewer
+LinkingTo: Rcpp
+Suggests: tm
+License: LGPL-2.1
+MD5sum: e24572b25da306326f000c54d8dc0bd1
+
+Package: XML
+Version: 3.9-4
+Depends: R (>= 1.2.0), methods, utils
+Imports: methods
+Suggests: bitops
+License: BSD
+MD5sum: c5c06ec7b0c5146683b77f379b7c3151
+
