@@ -5,16 +5,18 @@ set -e
 case "$1" in
   remove | abort-install)
     :
-	service tomcat7 stop
-	service apache2 stop
-	a2dismod ssl
-	a2dismod proxy_ajp
-	a2dissite ohmage
-	rm -f /opt/aw/as/webapps
-	rm -Rf /opt/aw/userdata/images
-	rm -Rf /opt/aw/userdata/documents
-	patch -R -N /etc/tomcat7/server.xml /opt/aw/install/enable-tomcat-ajp.patch || true
-	bash /opt/aw/install/wipe.aws.db.sh
+	service tomcat7 stop || true
+	service apache2 stop || true
+	a2dismod ssl || true
+	a2dismod proxy_ajp || true
+	a2dissite ohmage || true
+	patch -R -N /etc/tomcat7/server.xml /opt/ohmage/install/enable-tomcat-ajp.patch || true
+
+	bash /opt/ohmage/install/wipe.aws.db.sh || true
+	rm -Rf /opt/ohmage/userdata/images/*
+	rm -Rf /opt/ohmage/userdata/documents/*
+	rm -Rf /opt/ohmage/userdata/videos/*
+	rm -Rf /opt/ohmage/logs/*	
     ;;
   purge | disappear | abort-upgrade)
     :

@@ -8,7 +8,7 @@
 \usepackage{verbatim}
 
 \title{Ohmage Installation and Administration Manual for Ubuntu 12.04 (LTS)}
-\subtitle{Version 2.11-0}
+\subtitle{Version 2.12-0}
 
 
 \begin{document}
@@ -28,7 +28,7 @@ The following instructions will deploy a server with:
 
 \begin{itemize}
   \item Ubuntu 12.04
-  \item Ohmage 2.11
+  \item Ohmage 2.12
   \item OpenCPU 0.7 (optional)
 \end{itemize}
 
@@ -86,7 +86,7 @@ Ubuntu download page: \\
 \noindent If you would like to run Ohmage on an Amazon EC2 server, the best way
 is to use one of the official AMI's as provided by the ubuntu team: \\
 
-\url{http://cloud-images.ubuntu.com/releases/precise/release/} \\
+\url{http://cloud-images.ubuntu.com/precise/current/} \\
 
 \noindent Another possibility is to install a Ohmage on a virtual Ubuntu server
 inside another OS. For example, the free VMware Player is available for Windows 
@@ -112,11 +112,11 @@ Once the system is up to date, you can begin installing Ohmage.
 
 \subsection{Ohmage Installation}
 
-Start by adding the \texttt{ohmage-2.11} package respository to our system:
+Start by adding the \texttt{ohmage-2.12} package respository to our system:
 
 \begin{verbatim}
     sudo apt-get install python-software-properties
-    sudo add-apt-repository ppa:opencpu/ohmage-2.11
+    sudo add-apt-repository ppa:opencpu/ohmage-2.12
 \end{verbatim}
 The system will ask for confirmation on importing the public key. After the
 repository has been added to the system, update the package list:
@@ -136,20 +136,31 @@ ohmage and the optional vizualization server you can install
 \begin{verbatim}
     sudo apt-get install ohmage-standalone
 \end{verbatim}
-Ohmage has many dependencies, and installation might take a while on a vanilla
-server. During installation of MySQL (a dependency), the system might ask for a
-password for the mysql root user. Make sure to enter a strong password and write
-it down somewhere. You will not need it anymore during the insallation though.\\
+In the case you want to install \emph{only} the vizualization server, but not
+Ohmage itself, run:
+\begin{verbatim}
+    sudo apt-get install ohmage-viz
+\end{verbatim}
+Note that all of these packages are compatible. For example, to upgrade from
+\texttt{ohmage-server} to \texttt{ohmage-standalone} simply install the
+latter and it will automatically make the appropriate changes. \\
+
+\noindent Ohmage has many dependencies, and installation might take a while on
+a vanilla server. During installation of \texttt{MySQL} (a dependency), the
+system might ask for a password for the mysql root user. Make sure to enter a strong
+password and write it down somewhere. You will not need it anymore during the
+insallation though.\\
 
 \noindent If the installation finished without any problems, it will display the
-ip address of the host at the very end, which you can can open in your browser and use to test the server.
+ip address of the host somewhere at the end of the output, which you can can
+open in your browser and use to test the server. 
 
 \subsection{Uninstall Ohmage}
 
 If you want to remove Ohmage from a system you can use:
 
 \begin{verbatim}
-    sudo apt-get remove --purge ohmage-*
+    sudo apt-get remove ohmage-*
     sudo apt-get autoremove
 \end{verbatim}
 Note that this will delete the \texttt{ohmage} database from MySQL so all
@@ -200,8 +211,6 @@ The \texttt{webapps} directory, hosting the \texttt{.war} files is located at
 \begin{verbatim}
     /var/lib/tomcat7/webapps/
 \end{verbatim}
-For backward-compatibility reasons \texttt{/opt/aw/as/webapps} has a symbolic
-link to the webapps directory.
 
 \subsection{Apache2}
 
@@ -373,14 +382,21 @@ for example \url{http://www.dnsgoodies.com/}.
 
 \subsection{Other Ohmage files}
 
-Photos and Documents uploaded by users are stored in
+Photos, videos and documents uploaded by users are stored in
 
 \begin{verbatim}
-    /opt/aw/userdata/images/
-    /opt/aw/userdata/documents/
+    /opt/ohmage/userdata/images/
+    /opt/ohmage/userdata/documents/
+    /opt/ohmage/userdata/videos/
 \end{verbatim}
-Other than this, the \texttt{/opt/aw/} directory contains some scripts and files
-mostly for legacy reasons that you probably won't need.
+Other than this, \texttt{/opt/ohmage/} contains a directory with log files:
+
+\begin{verbatim}
+    /opt/ohmage/logs
+\end{verbatim}
+
+\noindent Note that these are only high level ohmage logs. If there are problems
+with the web server or database itsefl, these might appear in the tomcat logs. 
 
 \section{Clients}
 

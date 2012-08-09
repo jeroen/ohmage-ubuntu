@@ -6,9 +6,9 @@ case "$1" in
   remove)
     :
 	#remove self registration stuff from the preferences.
-	mysql -u ohmage -p\&\!sickly -e 'UPDATE ohmage.preference SET p_value="false" where p_key="self_registration_allowed";'
-	mysql -u ohmage -p\&\!sickly -e 'UPDATE ohmage.preference SET p_value="" where p_key="recaptcha_public_key";'
-	mysql -u ohmage -p\&\!sickly -e 'UPDATE ohmage.preference SET p_value="" where p_key="recaptcha_private_key";'
+	mysql -u ohmage -p\&\!sickly -e 'UPDATE ohmage.preference SET p_value="false" where p_key="self_registration_allowed";' || true
+	mysql -u ohmage -p\&\!sickly -e 'UPDATE ohmage.preference SET p_value="" where p_key="recaptcha_public_key";' || true
+	mysql -u ohmage -p\&\!sickly -e 'UPDATE ohmage.preference SET p_value="" where p_key="recaptcha_private_key";' || true
 	echo "Self registration disabled."
     ;;
   purge | disappear | upgrade | failed-upgrade | abort-upgrade | abort-install)

@@ -1,2 +1,2 @@
-debian/ohmage-viz-files/* /opt/aw/install/
+debian/ohmage-viz-files/* /opt/ohmage/install/
 packages/build/* /mnt/export/opencpu-admin-library/

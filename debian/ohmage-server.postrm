@@ -7,12 +7,15 @@ case "$1" in
     :
 		rm -Rf /var/lib/tomcat7/webapps/ohmage
 		rm -Rf /var/lib/tomcat7/webapps/app
-		#rm -Rf /opt/aw
 		
-		service tomcat7 start
-		service apache2 start
+		service tomcat7 start || true
+		service apache2 start || true
     ;;
-  purge | disappear | upgrade | failed-upgrade | abort-upgrade)
+  purge)
+    :
+    	rm -Rf /opt/ohmage
+    ;;
+  disappear | upgrade | failed-upgrade | abort-upgrade)
     :
     ;;
   *) echo "$0: didn't understand being called with \`$1'" 1>&2

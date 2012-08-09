@@ -7,11 +7,11 @@ case "$1" in
     :
 		if [ -f /etc/init.d/tomcat7 ];
 		then
-			service tomcat7 stop
+			service tomcat7 stop || true
 		fi   
 		if [ -f /etc/init.d/apache2 ];
 		then
-			service apache2 stop
+			service apache2 stop || true
 		fi	
 		rm -Rf /var/lib/tomcat7/webapps/app
 		rm -Rf /var/lib/tomcat7/webapps/ohmage
@@ -24,11 +24,11 @@ case "$1" in
 		
 		if [ -f /etc/init.d/tomcat7 ];
 		then
-			service tomcat7 stop
+			service tomcat7 stop || true
 		fi   
 		if [ -f /etc/init.d/apache2 ];
 		then
-			service apache2 stop
+			service apache2 stop || true
 		fi	
 		rm -Rf /var/lib/tomcat7/webapps/app
 		rm -Rf /var/lib/tomcat7/webapps/ohmage

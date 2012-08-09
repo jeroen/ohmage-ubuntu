@@ -1,5 +1,5 @@
-ohmage-ubuntu (2.11.2-precise7) precise; urgency=low
+ohmage-ubuntu (2.12.0-precise5) precise; urgency=low
 
   * Ubuntu builds for Ohmage server software. See www.ohmage.org.
 
- -- Jeroen Ooms <jeroen@opencpu.org>  Wed, 04 Jul 2012 15:00:00 -0800
+ -- Jeroen Ooms <jeroen@opencpu.org>  Wed, 08 Aug 2012 15:00:00 -0800

@@ -9,7 +9,7 @@ case "$1" in
 	mysql -u ohmage -p\&\!sickly -e 'update ohmage.preference set p_value = "http://127.0.0.1/R/call/Mobilize/" where p_key = "visualization_server_address";'
 	echo "updated viz server to 127.0.0.1"
 	clear
-	/opt/aw/install/showip.sh
+	/opt/ohmage/install/showip.sh
     ;;
   abort-upgrade | abort-remove | abort-deconfigure)
     :
