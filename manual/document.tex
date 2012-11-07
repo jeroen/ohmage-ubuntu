@@ -8,7 +8,7 @@
 \usepackage{verbatim}
 
 \title{Ohmage Installation and Administration Manual for Ubuntu 12.04 (LTS)}
-\subtitle{Version 2.12-0}
+\subtitle{Version 2.13-0}
 
 
 \begin{document}
@@ -28,7 +28,7 @@ The following instructions will deploy a server with:
 
 \begin{itemize}
   \item Ubuntu 12.04
-  \item Ohmage 2.12
+  \item Ohmage 2.13
   \item OpenCPU 0.7 (optional)
 \end{itemize}
 
@@ -81,7 +81,7 @@ etc. If you are already have an installed system, you can skip this section. \\
 edition. A copy of the Ubuntu Server installation disc can be obtained from the
 Ubuntu download page: \\
 
-\url{http://www.ubuntu.com/download/server/download} \\
+\url{http://www.ubuntu.com/download/server} \\
 
 \noindent If you would like to run Ohmage on an Amazon EC2 server, the best way
 is to use one of the official AMI's as provided by the ubuntu team: \\
@@ -112,11 +112,11 @@ Once the system is up to date, you can begin installing Ohmage.
 
 \subsection{Ohmage Installation}
 
-Start by adding the \texttt{ohmage-2.12} package respository to our system:
+Start by adding the \texttt{ohmage-2.13} package respository to our system:
 
 \begin{verbatim}
     sudo apt-get install python-software-properties
-    sudo add-apt-repository ppa:opencpu/ohmage-2.12
+    sudo add-apt-repository ppa:opencpu/ohmage-2.13
 \end{verbatim}
 The system will ask for confirmation on importing the public key. After the
 repository has been added to the system, update the package list:
