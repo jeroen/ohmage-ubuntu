@@ -6,7 +6,7 @@ case "$1" in
   configure)
     :
 	#update viz server in DB.
-	mysql -u ohmage -p\&\!sickly -e 'update ohmage.preference set p_value = "http://127.0.0.1/R/call/Mobilize/" where p_key = "visualization_server_address";'
+	mysql -u ohmage -p\&\!sickly -e 'update ohmage.preference set p_value = "http://127.0.0.1/R/pub/Mobilize/" where p_key = "visualization_server_address";'
 	echo "updated viz server to 127.0.0.1"
 	clear
 	/opt/ohmage/install/showip.sh

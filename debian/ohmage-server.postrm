@@ -7,13 +7,14 @@ case "$1" in
     :
 		rm -Rf /var/lib/tomcat7/webapps/ohmage
 		rm -Rf /var/lib/tomcat7/webapps/app
-		
+
 		service tomcat7 start || true
 		service apache2 start || true
     ;;
   purge)
     :
-    	rm -Rf /opt/ohmage
+	#messes up ohmage-viz as well
+    	#rm -Rf /opt/ohmage
     ;;
   disappear | upgrade | failed-upgrade | abort-upgrade)
     :

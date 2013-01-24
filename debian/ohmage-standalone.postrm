@@ -6,7 +6,7 @@ case "$1" in
   remove)
     :
 	#update viz server in DB.
-	mysql -u ohmage -p\&\!sickly -e 'update ohmage.preference set p_value = "http://rdev.mobilizingcs.org/R/call/Mobilize/" where p_key = "visualization_server_address";' || true    
+	mysql -u ohmage -p\&\!sickly -e 'update ohmage.preference set p_value = "http://opencpu.org/R/pub/Mobilize/" where p_key = "visualization_server_address";' || true    
     ;;
   purge | disappear | upgrade | failed-upgrade | abort-upgrade | abort-install)
     :

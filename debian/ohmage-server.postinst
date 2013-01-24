@@ -20,8 +20,9 @@ case "$1" in
 	else
 		echo "Seems like first install. Setting up Ohmage database..."
 		cd /opt/ohmage/install				
-		chmod +x create.aws.db.sh
+		chmod +x *.sh
 		./create.aws.db.sh
+		./setfqdn.sh || true
 		service mysql restart
 		patch -N /etc/tomcat7/server.xml enable-tomcat-ajp.patch || true
 	fi	

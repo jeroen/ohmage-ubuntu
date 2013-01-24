@@ -44,6 +44,7 @@ ALTER TABLE preference MODIFY p_value TEXT NOT NULL;
 INSERT INTO preference VALUES 
     ('recaptcha_public_key', ''),
     ('recaptcha_private_key', ''),
+    ('privileged_user_in_class_can_view_others_mobility', 'false'),
     ('self_registration_allowed', 'false'),
     ('terms_of_service', 'We will collect as much data as is required by our system and that you offer to our system, no more, no less. We will keep the data as secure as possible, but you recognize that unforeseeable incidents may happen that cause data to be lost or stolen. We make every effort to keep our systems as secure as possible.
 
@@ -79,7 +80,8 @@ We are constantly striving to build a great software and a pleasing experience t
     ('mail_password_reset_sender_address', 'no-reply@ohmage.org'),
     ('mail_password_reset_subject', 'ohmage: Password Reset'),
     ('mail_password_reset_text', '<h3>Password Reset</h3><p>Your password has been reset. Please attempt to login with your new password below at which time you will be prompted to change your password.</p>'),
-    ('cors-lenient-mode', 'false');
+    ('cors-lenient-mode', 'false'),
+    ('public_class_id', 'urn:class:public');
     
 -- The key in the classifier JSON for Mobility points for the N95 variance has
 -- been changed from "N95Variance" to "n95variance".
