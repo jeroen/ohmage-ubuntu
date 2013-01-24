@@ -12,7 +12,14 @@ case "$1" in
 	a2dissite ohmage || true
 	patch -R -N /etc/tomcat7/server.xml /opt/ohmage/install/enable-tomcat-ajp.patch || true
 
-	bash /opt/ohmage/install/wipe.aws.db.sh || true
+	#delete database
+	cd /opt/ohmage/install				
+	service mysql stop || true		
+	./awstemproot.sh
+	service mysql start
+	./wipe-db.sh || true
+	service mysql restart
+	
 	rm -Rf /opt/ohmage/userdata/images/*
 	rm -Rf /opt/ohmage/userdata/documents/*
 	rm -Rf /opt/ohmage/userdata/videos/*

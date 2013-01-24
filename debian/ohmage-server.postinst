@@ -19,9 +19,18 @@ case "$1" in
 		rm /tmp/ohmage_server_upgrade
 	else
 		echo "Seems like first install. Setting up Ohmage database..."
+		
+		#make scripts executable
 		cd /opt/ohmage/install				
 		chmod +x *.sh
-		./create.aws.db.sh
+		
+		#create the awstmproot user
+		service mysql stop || true		
+		./awstemproot.sh
+		service mysql start
+		
+		#build ohmage db and user
+		./create-db.sh
 		./setfqdn.sh || true
 		service mysql restart
 		patch -N /etc/tomcat7/server.xml enable-tomcat-ajp.patch || true
