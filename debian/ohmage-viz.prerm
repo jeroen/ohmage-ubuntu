@@ -6,7 +6,7 @@ case "$1" in
   remove | abort-install)
     :
 	  #First install of ohmage-viz. Trying to patch preload config
-	  cd /opt/ohmage/install			
+	  cd /usr/lib/ohmage/scripts			
 	  patch -RN /etc/opencpu/server.conf preload_config.patch -r /dev/null || true    
     ;;
   purge | disappear | abort-upgrade | upgrade | failed-upgrade)

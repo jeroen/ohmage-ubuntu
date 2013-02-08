@@ -12,7 +12,7 @@ case "$1" in
 		rm /tmp/ohmage_viz_upgrade
 	else
 		#First install of ohmage-viz. Trying to patch preload config
-		cd /opt/ohmage/install			
+		cd /usr/lib/ohmage/scripts			
 		patch -N /etc/opencpu/server.conf preload_config.patch -r /dev/null || true
 		
 		#restart opencpu

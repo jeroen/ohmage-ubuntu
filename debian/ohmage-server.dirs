@@ -1,4 +1,8 @@
-opt/ohmage/userdata/documents
-opt/ohmage/userdata/images
-opt/ohmage/userdata/videos
-opt/ohmage/logs/audits
+var/lib/ohmage/documents
+var/lib/ohmage/images
+var/lib/ohmage/videos
+var/log/ohmage/
+var/log/ohmage/audits
+usr/lib/ohmage/scripts
+usr/lib/ohmage/sql
+usr/lib/ohmage/warfiles

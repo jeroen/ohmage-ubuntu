@@ -5,16 +5,13 @@ set -e
 case "$1" in
   remove | abort-install)
     :
-		rm -Rf /var/lib/tomcat7/webapps/ohmage
-		rm -Rf /var/lib/tomcat7/webapps/app
-
 		service tomcat7 start || true
 		service apache2 start || true
     ;;
   purge)
     :
 	#messes up ohmage-viz as well
-    	#rm -Rf /opt/ohmage
+    #rm -Rf /var/lib/ohmage
     ;;
   disappear | upgrade | failed-upgrade | abort-upgrade)
     :

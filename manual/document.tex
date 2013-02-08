@@ -8,7 +8,7 @@
 \usepackage{verbatim}
 
 \title{Ohmage Installation and Administration Manual for Ubuntu 12.04 (LTS)}
-\subtitle{Version 2.13-0}
+\subtitle{Version 2.14-0}
 
 
 \begin{document}
@@ -28,7 +28,7 @@ The following instructions will deploy a server with:
 
 \begin{itemize}
   \item Ubuntu 12.04
-  \item Ohmage 2.13
+  \item Ohmage 2.14
   \item OpenCPU 0.7 (optional)
 \end{itemize}
 
@@ -39,9 +39,10 @@ software versions of third party Ohmage dependencies:
   \item Linux kernel 3.2.0
   \item OpenJDK 6b24
   \item MySQL 5.5.22
-  \item Apache 2.2.20 (includes mod-proxy-ajp and mod-ssl)
+  \item Apache 2.2.20 (includes \texttt{mod-proxy-ajp} and \texttt{mod-ssl})
   \item Tomcat 7.0.26
-  \item Postfix 2.9.1
+  \item Postfix 2.9.1 (used only by \texttt{ohmage-selfreg})
+  \item R 2.15.2 (used only by \texttt{ohmage-viz})
 \end{itemize}
 
 \noindent Please note that at this point there are no official Ubuntu builds of
@@ -52,34 +53,35 @@ Ohmage. The Ohmage installation packages for Ubuntu are kindly provided by the
 
 \section{Installation}
 
-This section will show how to install Ohmage on Ubuntu 12.04. There are 4
-Ubuntu packages: \texttt{ohmage-server}, \texttt{ohmage-viz}, 
-\texttt{ohmage-standalone} and \texttt{ohmage-selfreg}. The
-\texttt{ohmage-server} package is the main package, which will install the
-ohmage server and web administration frontend. The \texttt{ohmage-viz} package
-installs the optional vizualization server. The vizualization server can run on
-a different server than \texttt{ohmage-server}. If you want to install both
-Ohmage server and vizualization server on one and the same machine, this is
-easiest done by installing \texttt{ohmage-standalone}. The
-\texttt{ohmage-standalone} package is a very thin meta-package that will simply
-install both \texttt{ohmage-server} and \texttt{ohmage-viz}, and automatically
-update the Ohmage server to use the localhost vizualization server. \\
+This section will show how to install Ohmage on Ubuntu 12.04. The system
+currently consists of 4 installation packages: \texttt{ohmage-server},
+\texttt{ohmage-viz}, \texttt{ohmage-standalone} and \texttt{ohmage-selfreg}.
+The \texttt{ohmage-server} package is the main package, which will install the
+ohmage server and administration frontend. The \texttt{ohmage-viz} package
+installs the optional vizualization server. In production settings, the
+vizualization server should preferably run on a different server than
+\texttt{ohmage-server}. However, to install both the Ohmage server and
+vizualization server on one and the same machine, this is easiest done by
+installing \texttt{ohmage-standalone}. The \texttt{ohmage-standalone} package
+is a meta-package that will install both \texttt{ohmage-server} and
+\texttt{ohmage-viz}, and automatically update the Ohmage server to use the
+localhost vizualization server. \\
 
 \noindent Finally installing the \texttt{ohmage-selfreg} package activates the
 self-registration on the server. However, in order for self registration to
-work properly, the server might need a valid domain name. For more details, see
-section \ref{selfreg}.
+work properly, the server might need a valid domain name, and proper DNS
+configuration. For more details, see section \ref{selfreg}.
 
+\subsection{Installing Ubuntu 12.04}
 
-\subsection{Installing Ubuntu}
-
-\noindent The current build of Ohmage requires an Ubuntu 12.04 system. It can
-run on any version of Ubuntu, e.g. Ubuntu Desktop, Ubuntu Server, Kubuntu, Edubuntu,
-etc. If you are already have an installed system, you can skip this section. \\
+\noindent The current build of Ohmage requires an Ubuntu 12.04 system. Any
+version of Ubuntu will do, e.g. Ubuntu Desktop, Ubuntu Server, Kubuntu,
+Edubuntu, etc. If you are already have an installed system, you can skip this
+section. \\
 
 \noindent The preferred way of running Ohmage is on a clean Ubuntu Server
-edition. A copy of the Ubuntu Server installation disc can be obtained from the
-Ubuntu download page: \\
+edition. A copy of the Ubuntu Server installation disc ISO can be obtained from
+the Ubuntu download page: \\
 
 \url{http://www.ubuntu.com/download/server} \\
 
@@ -102,7 +104,8 @@ you can install Ubuntu and Ohmage safely on top of an existing system.
     cat /etc/*release
 \end{verbatim}
 If it turns out the system is running an older version of Ubuntu, upgrade the OS
-to 12.04 first. If the system is indeed 12.04, continue by updating the software packages to the latest versions:
+to 12.04 first. If the system is indeed 12.04, continue by updating the software
+packages to the latest versions:
 
 \begin{verbatim}
     sudo apt-get update
@@ -112,11 +115,11 @@ Once the system is up to date, you can begin installing Ohmage.
 
 \subsection{Ohmage Installation}
 
-Start by adding the \texttt{ohmage-2.13} package respository to our system:
+Start by adding the \texttt{ohmage-2.14} package respository to our system:
 
 \begin{verbatim}
     sudo apt-get install python-software-properties
-    sudo add-apt-repository ppa:opencpu/ohmage-2.13
+    sudo add-apt-repository ppa:opencpu/ohmage-2.14
 \end{verbatim}
 The system will ask for confirmation on importing the public key. After the
 repository has been added to the system, update the package list:
@@ -157,18 +160,18 @@ open in your browser and use to test the server.
 
 \subsection{Uninstall Ohmage}
 
-If you want to remove Ohmage from a system you can use:
+If you want to remove Ohmage from a system, run:
 
 \begin{verbatim}
-    sudo apt-get remove ohmage-*
-    sudo apt-get autoremove
+    sudo apt-get purge ohmage-*
+    sudo apt-get autoremove --purge
 \end{verbatim}
-Note that this will delete the \texttt{ohmage} database from MySQL so all
-data will be lost.
+Note that this will delete all data including the \texttt{ohmage} MySQL
+database.
 
 \section{Administration}
 
-The default install of Ohmage actually installs 3 sites:
+The \texttt{ohmage-server} packages installs 2 sites:
 
 \begin{itemize}
   \item Ohmage Server: \url{http://example.com/app/config/read}
@@ -176,12 +179,22 @@ The default install of Ohmage actually installs 3 sites:
   \item OpenCPU: \url{http://example.com/R} (only available with
   \texttt{ohmage-viz})
 \end{itemize}
-The standard user is \texttt{ohmage.admin} with password \texttt{ohmage.passwd}.
-You will be prompted to change this password on first login.
-By default, both http and https are enabled. However, the https is served by a
-self-signed a.k.a. \emph{snakeoil} SSL certificate, so the browser will give a
-warning about insecure encryption. For more info see the section \ref{ssl} of
-this manual.
+
+If the \texttt{ohmage-viz} or \texttt{ohmage-standalone} package is installed,
+the OpenCPU interface to \texttt{R} is also available:
+
+\begin{itemize}
+  \item OpenCPU: \url{http://example.com/R} 
+\end{itemize}
+
+After installation, visit the administration front-end to setup the
+administrator account: \url{http://example.com/ohmage}. After a new
+installation, one can authenticate using the default username and password
+\texttt{ohmage.admin} with \texttt{ohmage.passwd}. At first login, you will
+be prompted to change this password. By default, both http and https are
+enabled. However, the https is served by a self-signed a.k.a. \emph{snakeoil}
+SSL certificate, so the browser will give a warning about insecure encryption.
+For more info see the section \ref{ssl} of this manual.
 
 \subsection{Tomcat}
 
@@ -425,8 +438,17 @@ an Android 2.2 device. \\
 \end{center}
 \end{figure}
 
-\noindent The source code and instructions on how to build the app are publicly
-available on: \\
+\noindent The Android app can be downloaded from Google Play on any
+Android phone by searching for \texttt{ohmage}. More information about the
+app is available at: \\
+
+\url{https://play.google.com/store/apps/details?id=org.ohmage} \\
+
+When running the app for the first time after installing it from Google play, it
+will prompt the user for the server address of the Ohmage server.
+Alternatively, the app can be build from source. This way, the app can be
+distributed with a hardcoded server address. The source code and instructions on
+how to build the app are publicly available on: \\
 
 \url{https://github.com/cens/ohmagePhone} \\
 
@@ -469,6 +491,134 @@ illustrate the functionality of the package.
   mydata <- oh.survey_response.read("urn:campaign:myschool:food");
 \end{verbatim}
 
+\section{Getting Started}
 
+To understand how to use the Ohmage system, it is important to get familiar with
+the basic concepts and terminology.  
+
+\subsection{Survey terminology}
+
+The Ohmage system is used for deploying surveys on mobile phones. These surveys
+are defined in \emph{campaigns} using \texttt{XML} files. A user with
+appropriate privileges can then upload such an XML file to the Ohmage server in
+order to deploy the survey. Some essential concepts:
+
+\begin{itemize}
+  \item A \texttt{campaign} is an \texttt{XML} file which describes one or more
+  \texttt{surveys}. 
+  \item A \texttt{survey} is a set of survey questions called \texttt{prompts}.
+  \item A \texttt{prompt} is a single question inside a survey. There are
+  several \texttt{prompt types}. The prompt type specifies how the question is
+  displayed in the phone, and how it is stored on the server.
+\end{itemize}
+
+\noindent A basic outline of the XML structure of a campaign is outlined below.
+
+\begin{verbatim}
+    <campaign>
+      ... 
+      <surveys>
+        <survey>
+          <id>snack</id>
+          <title>snack survey</title>
+          ...
+          <prompt> ... </prompt>
+          <prompt> ... </prompt>
+          <prompt> ... </prompt>
+        </survey>
+        <survey>
+          ...
+        </survey>
+      </surveys>
+    </campaign>
+\end{verbatim}
+
+\noindent More details and examples on how to write a campaign can be found on
+the wiki page:
+\url{https://github.com/cens/ohmageServer/wiki/Campaign-Definition}.
+
+\subsection{Users, Roles and Classes}
+Users, roles and classes are the central concepts that control access to Ohmage.
+A user is a person who can authenticate with the system and perform certain
+actions. Users can either be created by an administrator, or self created,
+when self registration is enabled on the server.\\
+
+Users are organized in groups called \texttt{classes}. To give users access to a
+campaign, the users has to be added to a class that is associated with this
+campaign.\\
+
+Permissions of users are defined using \texttt{roles}. There are two types of
+roles: \texttt{class roles} and \texttt{campaign roles}. A user can have the
+class role of \texttt{admin}, \texttt{privileged} or \texttt{restricted}. 
+For each campaigns, the user can have any of the following roles:
+\texttt{participant}, \texttt{analyst}, \texttt{author}, or \texttt{supervisor}.
+For detailed descriptions on how classes and roles are used to manage user
+access, consult this wiki page:\\
+
+\url{https://github.com/cens/ohmageServer/wiki/About-Users,-Classes-and-Campaigns}
+
+
+
+\subsection{Prompt types}
+
+The prompt type is another central concept in the Ohmage system. Inside the XML
+file, each survey lists one or more \texttt{prompts}. These prompts represent
+survey questions. Each prompt has a \texttt{promptType} attribute, which defines
+what kind of question this is. The promptType determines how the question is
+displayed on the phone, how it is saved on the server, and what it looks like
+when data is exported from the server. \\
+
+Each prompt type has its own unique properties. These properties are used to
+configure the question. The most important prompt types include:
+
+\begin{itemize}
+  \item \texttt{number} -- Displays a number field. Properties include
+  \texttt{min} and \texttt{max}.
+  \item \texttt{single\_choise} -- Displays a ``multiple choice'' radiobutton
+  question with only one answer. Properties include a list of possible answers.
+  \item \texttt{multi\_choice} -- Displays a ``multiple choice'' checkbox
+  question where more than one answer can be checked. Properties include a list of
+  possible ansers.
+  \item \texttt{text} -- Displays a free text field.
+  \item \texttt{photo} -- Allows the user to take a picture.
+\end{itemize}
+
+\noindent A more extensive list of different prompt types and their properties
+is available here: \\
+
+\url{https://github.com/cens/ohmageServer/wiki/Campaign-Definition#wiki-promptTypes}
+
+\subsection{Work flow}
+
+Below the steps that outline the work flow of using Ohmage. We assume the ohmage
+server and front-end are installed using the \texttt{ohmage-server} package as
+described in section 2.\\
+
+\noindent The researcher first has to create a campaign and deploy it to the
+users. These steps include:
+
+\begin{enumerate}
+  \item Write a campaign XML file that defines the survey questions.
+  \item Deploy the XML on the server (using admin front-end)
+  \item Create a class and associate it with the campaign (using admin
+  front-end)
+  \item Create ohmage user accounts for all participants and add them to
+  the class.
+  \item Notify your participants of the server address, and their
+  username/password.
+\end{enumerate}
+
+\noindent Next, the participants can fill out the surveys
+
+\begin{enumerate}
+  \item Install the \texttt{ohmage} app on their phone.
+  \item Login to the ohmage server with their username and password.
+  \item Enroll in one of the campaigns they have access to.
+  \item Fill out any survey as many times as desired.
+\end{enumerate}
+
+\noindent Finally, at any time the researcher can view and export responses from
+the server. The administration front-end has some basic tools of exporting data
+in e.g. CSV format.
 
 \end{document}

@@ -1,4 +1,4 @@
-debian/ohmage-server-files/install/ohmage /etc/apache2/sites-available
-debian/ohmage-server-files/warfiles/* /var/lib/tomcat7/webapps
-debian/ohmage-server-files/install/* /opt/ohmage/install
-
+ohmage-server/scripts/ohmage /etc/apache2/sites-available
+ohmage-server/warfiles/* /usr/lib/ohmage/warfiles
+ohmage-server/scripts/* /usr/lib/ohmage/scripts
+ohmage-server/sql/* /usr/lib/ohmage/sql

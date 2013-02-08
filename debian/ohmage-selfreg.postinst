@@ -11,7 +11,7 @@ case "$1" in
 	mysql -u ohmage -p\&\!sickly -e 'UPDATE ohmage.preference SET p_value="6Lc1V9ESAAAAAJRdzruUdgzcXBP-CQpoeX1sv_Tn" where p_key="recaptcha_private_key";'
 	clear
 	echo "Enabled self registration. Make sure your SMTP server is working properly though."
-	/opt/ohmage/install/showip.sh
+	/usr/lib/ohmage/scripts/showip.sh
     ;;
   abort-upgrade | abort-remove | abort-deconfigure)
     :

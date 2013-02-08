@@ -8,9 +8,18 @@ case "$1" in
 	service tomcat7 stop || true
 	service apache2 stop || true
 
-	chown -Rf tomcat7 /opt/ohmage
-	chgrp -Rf tomcat7 /opt/ohmage   
+	chown -Rf tomcat7 /var/lib/ohmage
+	chgrp -Rf tomcat7 /var/lib/ohmage  
+	chown -Rf tomcat7 /var/log/ohmage  
+	chgrp -Rf tomcat7 /var/log/ohmage  
 	
+	#make scripts executable
+	cd /usr/lib/ohmage/scripts				
+	chmod +x *.sh	
+	
+	#create symlinks for tomcat webapps
+	ln -sf /usr/lib/ohmage/warfiles/app.war /var/lib/tomcat7/webapps/app.war || true
+	ln -sf /usr/lib/ohmage/warfiles/ohmage.war /var/lib/tomcat7/webapps/ohmage.war || true
 	
 	#The db part should only be executed on first install. See also .preinst script.
 	if [ -f /tmp/ohmage_server_upgrade ];
@@ -20,32 +29,27 @@ case "$1" in
 	else
 		echo "Seems like first install. Setting up Ohmage database..."
 		
-		#make scripts executable
-		cd /opt/ohmage/install				
-		chmod +x *.sh
-		
-		#create the awstmproot user
-		service mysql stop || true		
-		./awstemproot.sh
-		service mysql start
-		
 		#build ohmage db and user
-		./create-db.sh
-		./setfqdn.sh || true
-		service mysql restart
+		./create-db-root.sh
+		./setfqdn.sh `./getip.sh` || true
 		patch -N /etc/tomcat7/server.xml enable-tomcat-ajp.patch || true
 	fi	
 	
-	# a2dissite default
+	#enable apache2 modules
 	a2enmod ssl
 	a2enmod proxy_ajp
+	
+	#enable apache2 sites
 	a2ensite default
 	a2ensite default-ssl
 	a2ensite ohmage
+	
+	#start services
 	service tomcat7 start	
 	service apache2 start	
-	chmod +x /opt/ohmage/install/showip.sh
-	/opt/ohmage/install/showip.sh
+	
+	#try to print IP address
+	/usr/lib/ohmage/scripts/showip.sh
     ;;
   abort-upgrade | abort-remove | abort-deconfigure)
     :

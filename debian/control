@@ -10,6 +10,11 @@ Architecture: all
 Depends: patch, ssl-cert, mysql-server, tomcat7, apache2
 Description: Ohmage server with mobilize frontend.
 
+Package: ohmage-selfreg
+Architecture: all
+Depends: ohmage-server, postfix | sendmail
+Description: Ohmage server self registration module
+
 Package: ohmage-standalone 
 Architecture: all
 Depends: ohmage-server, ohmage-viz
@@ -19,8 +24,3 @@ Package: ohmage-viz
 Architecture: any
 Depends: patch, ssl-cert, opencpu-server
 Description: Ohmage viz server.
-
-Package: ohmage-selfreg
-Architecture: all
-Depends: ohmage-server, postfix | sendmail
-Description: Ohmage server self registration module
