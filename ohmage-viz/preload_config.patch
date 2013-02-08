@@ -1,0 +1,11 @@
+--- default.conf	2012-05-15 17:17:55.000000000 -0700
++++ default_new.conf	2012-05-18 10:13:11.228845013 -0700
+@@ -28,5 +28,5 @@
+         "/usr/lib/opencpu/opencpu-system-library/",
+         "/usr/lib64/R/library"
+     ],
+-    "preload": []
+-}
+\ No newline at end of file
++    "preload": ["Mobilize"]
++}

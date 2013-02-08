@@ -1,0 +1,23 @@
+\BOOKMARK [1][-]{section.1}{Installation}{}% 1
+\BOOKMARK [2][-]{subsection.1.1}{Installing Ubuntu 12.04}{section.1}% 2
+\BOOKMARK [2][-]{subsection.1.2}{Getting the system up-to-date}{section.1}% 3
+\BOOKMARK [2][-]{subsection.1.3}{Ohmage Installation}{section.1}% 4
+\BOOKMARK [2][-]{subsection.1.4}{Uninstall Ohmage}{section.1}% 5
+\BOOKMARK [1][-]{section.2}{Administration}{}% 6
+\BOOKMARK [2][-]{subsection.2.1}{Tomcat}{section.2}% 7
+\BOOKMARK [2][-]{subsection.2.2}{Apache2}{section.2}% 8
+\BOOKMARK [2][-]{subsection.2.3}{MySQL}{section.2}% 9
+\BOOKMARK [2][-]{subsection.2.4}{OpenCPU \(part of ohmage-viz\)}{section.2}% 10
+\BOOKMARK [2][-]{subsection.2.5}{SSL certificate}{section.2}% 11
+\BOOKMARK [2][-]{subsection.2.6}{Self registration}{section.2}% 12
+\BOOKMARK [3][-]{subsubsection.2.6.1}{Important: Reverse DNS and Spam Detection}{subsection.2.6}% 13
+\BOOKMARK [2][-]{subsection.2.7}{Other Ohmage files}{section.2}% 14
+\BOOKMARK [1][-]{section.3}{Clients}{}% 15
+\BOOKMARK [2][-]{subsection.3.1}{The Ohmage Android App}{section.3}% 16
+\BOOKMARK [2][-]{subsection.3.2}{The Ohmage FrontEnd}{section.3}% 17
+\BOOKMARK [2][-]{subsection.3.3}{The Ohmage R package}{section.3}% 18
+\BOOKMARK [1][-]{section.4}{Getting Started}{}% 19
+\BOOKMARK [2][-]{subsection.4.1}{Survey terminology}{section.4}% 20
+\BOOKMARK [2][-]{subsection.4.2}{Users, Roles and Classes}{section.4}% 21
+\BOOKMARK [2][-]{subsection.4.3}{Prompt types}{section.4}% 22
+\BOOKMARK [2][-]{subsection.4.4}{Work flow}{section.4}% 23

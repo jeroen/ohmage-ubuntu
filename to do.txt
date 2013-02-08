@@ -1,0 +1,3 @@
+- enable https on fedora
+- build on opensuse
+- use suse build service

@@ -1,0 +1,1 @@
+UPDATE ohmage.preference SET p_value="http://public.opencpu.org/R/pub/Mobilize/" where p_key="visualization_server_address";
