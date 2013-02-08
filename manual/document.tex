@@ -398,11 +398,11 @@ for example \url{http://www.dnsgoodies.com/}.
 Photos, videos and documents uploaded by users are stored in
 
 \begin{verbatim}
-    /opt/ohmage/userdata/images/
-    /opt/ohmage/userdata/documents/
-    /opt/ohmage/userdata/videos/
+    /var/lib/ohmage/images/
+    /var/lib/ohmage/documents/
+    /var/lib/ohmage/videos/
 \end{verbatim}
-Other than this, \texttt{/opt/ohmage/} contains a directory with log files:
+Log files for ohmage can be found in:
 
 \begin{verbatim}
     /opt/ohmage/logs
@@ -410,6 +410,12 @@ Other than this, \texttt{/opt/ohmage/} contains a directory with log files:
 
 \noindent Note that these are only high level ohmage logs. If there are problems
 with the web server or database itsefl, these might appear in the tomcat logs. 
+Finally, some static files included in the installation packages (scripts,
+war files) can be found at:
+
+\begin{verbatim}
+    /usr/lib/ohmage/
+\end{verbatim}
 
 \section{Clients}
 
