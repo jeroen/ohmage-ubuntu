@@ -1,3 +1,5 @@
 FLUSH PRIVILEGES;
-DROP DATABASE ohmage;
+DROP DATABASE IF EXISTS ohmage;
+GRANT USAGE ON *.* TO 'ohmage'@'localhost';
 DROP USER 'ohmage'@'localhost';
+

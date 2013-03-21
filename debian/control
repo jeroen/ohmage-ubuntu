@@ -12,7 +12,7 @@ Description: Ohmage server with mobilize frontend.
 
 Package: ohmage-selfreg
 Architecture: all
-Depends: ohmage-server, postfix | sendmail
+Depends: ohmage-server, mail-transport-agent
 Description: Ohmage server self registration module
 
 Package: ohmage-standalone 

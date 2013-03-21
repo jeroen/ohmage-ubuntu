@@ -32,7 +32,9 @@ case "$1" in
 		#build ohmage db and user
 		./create-db-root.sh
 		./setfqdn.sh `./getip.sh` || true
-		patch -N /etc/tomcat7/server.xml enable-tomcat-ajp.patch || true
+		
+		#try to enable AJP13 in tomcat7 if not enabled yet
+		patch -N /etc/tomcat7/server.xml -r /dev/null enable-tomcat-ajp.patch > /dev/null || true
 	fi	
 	
 	#enable apache2 modules
@@ -45,8 +47,8 @@ case "$1" in
 	a2ensite ohmage
 	
 	#start services
-	service tomcat7 start	
-	service apache2 start	
+	service tomcat7 start || true
+	service apache2 start || true
 	
 	#try to print IP address
 	/usr/lib/ohmage/scripts/showip.sh

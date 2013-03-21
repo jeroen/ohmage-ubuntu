@@ -13,7 +13,9 @@ case "$1" in
 	
 	#remove apache2 site
 	a2dissite ohmage || true
-	patch -R -N /etc/tomcat7/server.xml /usr/lib/ohmage/scripts/enable-tomcat-ajp.patch || true
+	
+	# undo patch (not needed?)
+	# patch -R -N /etc/tomcat7/server.xml /usr/lib/ohmage/scripts/enable-tomcat-ajp.patch || true
 
 	#delete ohmage database
 	/usr/lib/ohmage/scripts/wipe-db-root.sh || true

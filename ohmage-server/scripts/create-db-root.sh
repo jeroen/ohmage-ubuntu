@@ -14,6 +14,9 @@ cat ./custom/*.sql >> dbsetup.sql
 #run mysql without security:
 cp /usr/lib/ohmage/scripts/skipgranttables.cnf /etc/mysql/conf.d/
 service mysql restart
+
+#Give it some time to load
+sleep 3
 rm /etc/mysql/conf.d/skipgranttables.cnf
 
 #create database and user
