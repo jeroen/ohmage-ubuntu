@@ -1,0 +1,6 @@
+/*! Robust drop. Script also runs if user or database do not previously exist */
+FLUSH PRIVILEGES;
+DROP DATABASE IF EXISTS ohmage;
+GRANT USAGE ON *.* TO 'ohmage'@'localhost';
+DROP USER 'ohmage'@'localhost';
+
