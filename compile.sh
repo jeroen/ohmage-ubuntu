@@ -25,8 +25,8 @@ mkdir -p warfiles
 
 #compile server code
 cd ohserver
-ant clean dist
-mv ./dist/*.war ../warfiles/
+#ant clean dist
+#mv ./dist/*.war ../warfiles/
 ant clean dist-no_ssl
 mv ./dist/*.war ../warfiles/
 cd ..
@@ -34,7 +34,7 @@ rm -Rf ohserver
 
 #compile frontend
 cd ohfrontend
-ant clean build buildwar
+#ant clean build buildwar
 ant clean build buildwar-nossl
 cp ./*.war ../warfiles/
 cd ..
