@@ -9,7 +9,7 @@ mkdir -p warfiles
 
 
 ### Compile server:
-git clone git://github.com/cens/ohmageServer.git -b master 
+git clone git://github.com/cens/ohmageServer.git -b ohmage-2.14 
 cd ohmageServer
 sed -i 's/\/opt\/ohmage\/logs\/ohmage.log/\/var\/log\/ohmage\/ohmage.log/g' web/WEB-INF/classes/log4j.properties
 ant clean dist-no_ssl
