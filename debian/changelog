@@ -1,4 +1,8 @@
+<<<<<<< HEAD
 ohmage-ubuntu (2.14.0-precise29) precise; urgency=low
+=======
+ohmage-ubuntu (2.15.0-precise2) precise; urgency=low
+>>>>>>> ohmage-2.15
 
   * Ubuntu builds for Ohmage server software. See www.ohmage.org.
 
